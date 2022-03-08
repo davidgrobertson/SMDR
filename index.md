@@ -10,9 +10,9 @@ The code is written in C, and may be linked from C or C++. `SMDR` is free softwa
 
 The authors are [Stephen P. Martin](https://www.niu.edu/spmartin) and [David G. Robertson](http://faculty.otterbein.edu/drobertson). The paper announcing SMDR is available from the arXiv.org preprint archive as [1907.02500](https://arxiv.org/abs/1907.02500).
 
-SMDR includes copies of the [`TSIL`](https://davidgrobertson.github.io/TSIL) and [`3VIL`](https://davidgrobertson.github.io/3VIL) libraries of utilities for the numerical calculation of dimensionally regularized two-loop self-energy integrals and three-loop vacuum integrals, respectively.
+`SMDR` includes copies of the [`TSIL`](https://davidgrobertson.github.io/TSIL) and [`3VIL`](https://davidgrobertson.github.io/3VIL) libraries of utilities for the numerical calculation of dimensionally regularized two-loop self-energy integrals and three-loop vacuum integrals, respectively.
 
-SMDR subsumes and replaces our earlier program SMH, which calculated the Higgs pole mass.
+`SMDR` subsumes and replaces our earlier program SMH, which calculated the Higgs pole mass.
 
 This material is based upon work supported by the National Science Foundation under Grant PHY-1719273. The work of DGR was supported in part by a grant from the Ohio Supercomputer Center.
 
@@ -20,32 +20,4 @@ Any opinions, findings, and conclusions or recommendations expressed in this mat
 
 **The density matrix is an unexciting concept.**
 
-`Here is some space`
-
-You can use the [editor on GitHub](https://github.com/drobOU/SMDR/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+_Here is some space_
