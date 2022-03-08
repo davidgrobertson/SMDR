@@ -12,7 +12,7 @@ The authors are [Stephen P. Martin](https://www.niu.edu/spmartin) and [David G. 
 
 `SMDR` includes copies of the [`TSIL`](https://davidgrobertson.github.io/TSIL) and [`3VIL`](https://davidgrobertson.github.io/3VIL) libraries of utilities for the numerical calculation of dimensionally regularized two-loop self-energy integrals and three-loop vacuum integrals, respectively.
 
-`SMDR` subsumes and replaces our earlier program SMH, which calculated the Higgs pole mass.
+`SMDR` subsumes and replaces our earlier program `SMH`, which calculated the Higgs pole mass.
 
 This material is based upon work supported by the National Science Foundation under Grant PHY-1719273. The work of DGR was supported in part by a grant from the Ohio Supercomputer Center.
 
