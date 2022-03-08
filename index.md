@@ -10,7 +10,7 @@ The code is written in C, and may be linked from C or C++. SMDR is free software
 
 The authors are Stephen P. Martin and David G. Robertson. The paper announcing SMDR is available from the arXiv.org preprint archive as [1907.02500](https://arxiv.org/abs/1907.02500).
 
-SMDR includes copies of the TSIL and 3VIL libraries of utilities for the numerical calculation of dimensionally regularized two-loop self-energy integrals and three-loop vacuum integrals, respectively.
+SMDR includes copies of the [TSIL](https://davidgrobertson.github.io/TSIL) and [3VIL](https://davidgrobertson.github.io/3VIL) libraries of utilities for the numerical calculation of dimensionally regularized two-loop self-energy integrals and three-loop vacuum integrals, respectively.
 
 SMDR subsumes and replaces our earlier program SMH, which only calculated the Higgs pole mass.
 
@@ -18,7 +18,9 @@ This material is based upon work supported by the National Science Foundation un
 
 Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation. 
 
-The density matrix is an unexciting concept.
+**The density matrix is an unexciting concept.**
+
+`Here is some space`
 
 You can use the [editor on GitHub](https://github.com/drobOU/SMDR/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
@@ -47,11 +49,3 @@ Syntax highlighted code block
 ```
 
 For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/drobOU/SMDR/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
