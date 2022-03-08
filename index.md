@@ -4,7 +4,7 @@
 
 The MSbar Lagrangian parameters are treated as the fundamental inputs, and calculations relating them to on-shell observable quantities are implemented in a consistent way. The Higgs vacuum expectation value (VEV) is defined as the minimum of the Landau gauge effective potential, so that tadpole diagrams vanish.
 
-Included at present are the minimization condition for the VEV at 3-loop order with 4-loop QCD effects, the Higgs pole mass at 2-loop order with 3-loop QCD and top-quark Yukawa effects, the top-quark pole mass at 4-loop order in QCD with full 2-loop electroweak effects, the W- and Z-boson pole and Breit-Wigner masses and the Fermi decay constant at full 2-loop orders, the fine structure constant and weak mixing angle, and all known contributions to renormalization group equations and threshold matching relations for the gauge couplings, fermion masses and Yukawa couplings.
+Included at present are the minimization condition for the VEV at 3-loop order with 4-loop QCD effects, the Higgs pole mass at 2-loop order with leading momentum-dependent 3-loop QCD and top-quark Yukawa effects (up to order yt^2 g3^4), the top-quark pole mass at 4-loop order in QCD with full 2-loop electroweak effects, the W- and Z-boson pole and Breit-Wigner masses at full 2-loop order with leading 3-loop QCD contributions, and the Fermi decay constant at full 2-loop order, the fine structure constant and weak mixing angle, and all known contributions to renormalization group equations and threshold matching relations for the gauge couplings, fermion masses and Yukawa couplings.
 
 The code is written in C, and may be linked from C or C++. `SMDR` is free software, released under the [GPL](http://www.gnu.org/licenses/gpl-3.0.html).
 
