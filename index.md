@@ -10,7 +10,15 @@ The code is written in C, and may be linked from C or C++. SMDR is free software
 
 The authors are Stephen P. Martin and David G. Robertson. The paper announcing SMDR is available from the arXiv.org preprint archive as 1907.02500.
 
+SMDR includes copies of the TSIL and 3VIL libraries of utilities for the numerical calculation of dimensionally regularized two-loop self-energy integrals and three-loop vacuum integrals, respectively.
 
+SMDR subsumes and replaces our earlier program SMH, which only calculated the Higgs pole mass.
+
+This material is based upon work supported by the National Science Foundation under Grant PHY-1719273. The work of DGR was supported in part by a grant from the Ohio Supercomputer Center.
+
+Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation. 
+
+The density matrix is an unexciting concept.
 
 You can use the [editor on GitHub](https://github.com/drobOU/SMDR/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
