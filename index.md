@@ -1,6 +1,16 @@
-## Welcome to GitHub Pages
+## [S]tandard [M]odel in [D]imensional [R]egularization
 
-HERE IS SOME SPACE.
+SMDR is a library of computer utilities, written in C, for calculations in the tadpole-free pure MSbar scheme in the Standard Model of particle physics.
+
+The MSbar Lagrangian parameters are treated as the fundamental inputs, and calculations relating them to on-shell observable quantities are implemented in a consistent way. The Higgs vacuum expectation value (VEV) is defined as the minimum of the Landau gauge effective potential, so that tadpole diagrams vanish.
+
+Included at present are the minimization condition for the VEV at 3-loop order with 4-loop QCD effects, the Higgs pole mass at 2-loop order with 3-loop QCD and top-quark Yukawa effects, the top-quark pole mass at 4-loop order in QCD with full 2-loop electroweak effects, the W- and Z-boson pole and Breit-Wigner masses and the Fermi decay constant at full 2-loop orders, the fine structure constant and weak mixing angle, and all known contributions to renormalization group equations and threshold matching relations for the gauge couplings, fermion masses and Yukawa couplings.
+
+The code is written in C, and may be linked from C or C++. SMDR is free software, released under the GPL.
+
+The authors are Stephen P. Martin and David G. Robertson. The paper announcing SMDR is available from the arXiv.org preprint archive as 1907.02500.
+
+
 
 You can use the [editor on GitHub](https://github.com/drobOU/SMDR/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
