@@ -1,0 +1,56 @@
+February XX, 2022 Version 1.1
+---------------------------
+
+* Significant improvements to src/Mh.c, to include the momentum-dependent 
+  3-loop QCD (yt^2 g3^4 t) contributions to the pole mass, and to correct 
+  and improve the (yt^6 t) contributions, and to make the evaluation more 
+  efficient. The 2-loop non-QCD integrals are now evaluated at s = h, rather 
+  than at s = Re[spole].
+ 
+* In the files src/MW.c and src/MZ.c, the functions SMDR_MW_3loopQCD() and 
+  SMDR_MZ_3loopQCD() have been added, providing the leading 3-loop QCD 
+  contributions. The allowed loopOrder arguments of SMDR_Eval_MW_pole()
+  and SMDR_Eval_MZ_pole() now include 2.5, which is also the new default. 
+  This indicates full 2-loop plus leading 3-loop QCD contributions are 
+  included.
+
+* In the files src/fit_obs.c, applications/calc_all.c,  
+  applications/fig_MZ_vs_Q.c, and applications/fig_MW_vs_Q.c,
+  the calls of functions SMDR_Eval_MW_pole() and SMDR_Eval_MW_pole() now 
+  use loopOrder = 2.5 rather than 2. Note that the output data from running 
+  the fig_*_vs_Q programs will no longer agree with the figures in the 
+  paper arXiv:1907.02500, which used older benchmark input data and did not 
+  have the 3-loop QCD improvements to W, Z, and h pole masses introduced
+  in this version.
+
+* The benchmark data files benchmark_data/ReferenceModel.dat and 
+  src/smdr_pdg.h have been updated to include the latest data from the 
+  2021 update of the 2020 Review of Particle Properties. The changes in this
+  version are:
+    Top-quark pole mass: 172.4 has changed to 172.5
+    Higgs pole mass: 125.1 has been changed to 125.25
+
+
+June 18, 2020 Version 1.01
+---------------------------
+
+* The complete 4-loop contributions to the non-decoupled Standard Model 
+  gauge coupling beta functions have been added, in src/betas.c. This 
+  consists of results from 1912.07624 "Gauge coupling beta functions to 
+  four-loop order in the Standard Model", by Joshua Davies, Florian Herren, 
+  Colin Poole, Matthias Steinhauser, Anders Eller Thomsen.
+
+* The benchmark file benchmark_data/ReferenceModel.dat and 
+  src/smdr_pdg.h have been updated to include the latest data from the 
+  2020 Review of Particle Properties. The changes are:
+    Top-quark pole mass: 173.1 has changed to 172.4
+    QCD coupling alpha_S: 0.1181 has changed to 0.1179
+    Delta_alpha_had_5_MZ: 0.02764 has changed to 0.02766
+    s2W_MZ: 0.23122 has changed to 0.23121
+    Fine structure constant: 0.0072973525664 has changed to 0.0072973525693
+
+* The included code tsil-1.44 has been updated to tsil-1.45 and 3vil-v2.0 
+  has been updated to 3vil-v2.01. These changes should affect nothing in 
+  smdr, except to make some computations involving trilogs slightly faster.
+
+
