@@ -8,7 +8,7 @@ Included at present are the minimization condition for the VEV at 3-loop order w
 
 The code is written in C, and may be linked from C or C++. `SMDR` is free software, released under the [GPL](http://www.gnu.org/licenses/gpl-3.0.html).
 
-The authors are [Stephen P. Martin](https://www.niu.edu/spmartin) and [David G. Robertson](http://faculty.otterbein.edu/drobertson). The paper announcing SMDR is available from the arXiv.org preprint archive as [1907.02500](https://arxiv.org/abs/1907.02500).
+The authors are [Stephen P. Martin](https://www.niu.edu/spmartin) and [David G. Robertson](http://faculty.otterbein.edu/drobertson). The paper announcing `SMDR` is available from the arXiv.org preprint archive as [1907.02500](https://arxiv.org/abs/1907.02500).
 
 `SMDR` includes copies of the [`TSIL`](https://davidgrobertson.github.io/TSIL) and [`3VIL`](https://davidgrobertson.github.io/3VIL) libraries of utilities for the numerical calculation of dimensionally regularized two-loop self-energy integrals and three-loop vacuum integrals, respectively.
 
