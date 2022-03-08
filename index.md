@@ -10,7 +10,7 @@ The code is written in C, and may be linked from C or C++. `SMDR` is free softwa
 
 The authors are [Stephen P. Martin](https://www.niu.edu/spmartin) and [David G. Robertson](http://faculty.otterbein.edu/drobertson). The paper announcing `SMDR` is available from the arXiv.org preprint archive as [1907.02500](https://arxiv.org/abs/1907.02500).
 
-The source code for the current version of SMDR may be downloaded at left as a zip ot tar.gz archive. Note that `SMDR` already includes copies of the [`TSIL`](https://davidgrobertson.github.io/TSIL) and [`3VIL`](https://davidgrobertson.github.io/3VIL) libraries of utilities for the numerical calculation of dimensionally regularized two-loop self-energy integrals and three-loop vacuum integrals, respectively.
+The source code for the current version of SMDR may be downloaded at left as a zip ot tar.gz archive. Note that `SMDR` includes copies of the [`TSIL`](https://davidgrobertson.github.io/TSIL) and [`3VIL`](https://davidgrobertson.github.io/3VIL) libraries of utilities for the numerical calculation of dimensionally regularized two-loop self-energy integrals and three-loop vacuum integrals, respectively.
 
 `SMDR` subsumes and replaces our earlier program `SMH`, which calculated the Higgs pole mass.
 
