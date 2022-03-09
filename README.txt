@@ -65,10 +65,10 @@ document as [MR19]):
 
 Other directly relevant papers are:
 
-  [SM22] "Three-loop QCD corrections to the electroweak boson masses",
-         Stephen P. Martin, e-Print: arXiv:2202.XXXXX
+ [SPM22] "Three-loop QCD corrections to the electroweak boson masses",
+         Stephen P. Martin, e-Print: arXiv:2203.XXXXX
          
-  [SM17] "Effective potential at three loops", Stephen P. Martin,
+ [SPM17] "Effective potential at three loops", Stephen P. Martin,
   	 Phys.Rev. D96 (2017) no.9, 096005 e-Print: arXiv:1709.02397
   	 [hep-ph]
 
@@ -76,7 +76,7 @@ Other directly relevant papers are:
   	 by S.P. Martin and D.G. Robertson Phys. Rev. D95 (2017) no.1,
   	 016008 [arXiv:1610.07720]
 
-  [SM16] "Top-quark pole mass in the tadpole-free MS-bar scheme"
+ [SPM16] "Top-quark pole mass in the tadpole-free MS-bar scheme"
   	 Stephen P. Martin Phys.Rev. D93 (2016) no.9, 094017 e-Print:
   	 arXiv:1604.01134 [hep-ph]
 
