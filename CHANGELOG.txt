@@ -1,4 +1,4 @@
-March XX, 2022 Version 1.1
+March 10, 2022 Version 1.1
 ---------------------------
 
 * Significant improvements to src/Mh.c, to include the momentum-dependent 

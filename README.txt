@@ -66,7 +66,7 @@ document as [MR19]):
 Other directly relevant papers are:
 
  [SPM22] "Three-loop QCD corrections to the electroweak boson masses",
-         Stephen P. Martin, e-Print: arXiv:2203.XXXXX
+         Stephen P. Martin, e-Print: arXiv:2203.05042
          
  [SPM17] "Effective potential at three loops", Stephen P. Martin,
   	 Phys.Rev. D96 (2017) no.9, 096005 e-Print: arXiv:1709.02397

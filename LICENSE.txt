@@ -87,7 +87,7 @@ e-Print: arXiv:1709.02397 [hep-ph]
 
 "Three-loop QCD corrections to the electroweak boson masses"
 Stephen P. Martin, 
-e-Print: arXiv:2203.XXXXX
+e-Print: arXiv:2203.05042
  	
 **************************************************************************
 
