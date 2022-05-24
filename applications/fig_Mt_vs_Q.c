@@ -20,6 +20,10 @@
    11   Mt     4-loop QCD + 1-loop nonQCD + 2-loop full  
    12   Gammat 4-loop QCD + 1-loop nonQCD + 2-loop full
 
+   where, as of version 1.2, the complex pole squared mass is:
+
+   s_pole = (Mt_pole - i Gammat_pole/2)^2.  
+
    Two output files are produced: "FIG_Mt_vs_Q_0.dat" and
    "FIG_Mt_vs_Q_1.dat", using expansions around the tree-level and
    real pole masses, respectively.

@@ -8,20 +8,20 @@
 # Higgs VEV = 246.601091;
 # 
 # COLUMN DESCRIPTIONS:
-# 1  Q                  (MSbar renormalization scale)
-# 2  MW_pole            (loopOrder = 0, tree-level)
-# 3  MW_pole            (loopOrder = 1, 1-loop)
-# 4  MW_BreitWigner     (loopOrder = 1, 1-loop)
-# 5  GammaW_pole        (loopOrder = 1, 1-loop)
-# 6  GammaW_BreitWigner (loopOrder = 1, 1-loop)
-# 7  MW_pole            (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-# 8  MW_BreitWigner     (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-# 9  GammaW_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-# 10 GammaW_BreitWigner (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-# 11 MW_pole            (loopOrder = 2, full 2-loop)
-# 12 MW_BreitWigner     (loopOrder = 2, full 2-loop)
-# 13 GammaW_pole        (loopOrder = 2, full 2-loop)
-# 14 GammaW_BreitWigner (loopOrder = 2, full 2-loop)
+# 1  Q              (MSbar renormalization scale)
+# 2  MW_pole        (loopOrder = 0, tree-level)
+# 3  MW_pole        (loopOrder = 1, 1-loop)
+# 4  MW_PDG         (loopOrder = 1, 1-loop)
+# 5  GammaW_pole    (loopOrder = 1, 1-loop)
+# 6  GammaW_PDG     (loopOrder = 1, 1-loop)
+# 7  MW_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+# 8  MW_PDG         (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+# 9  GammaW_pole    (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+# 10 GammaW_PDG     (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+# 11 MW_pole        (loopOrder = 2, full 2-loop)
+# 12 MW_PDG         (loopOrder = 2, full 2-loop)
+# 13 GammaW_pole    (loopOrder = 2, full 2-loop)
+# 14 GammaW_PDG     (loopOrder = 2, full 2-loop)
 # 
 # In the paper: arXiv:1907.02500
 # Standard Model parameters in the tadpole-free pure MSbar scheme

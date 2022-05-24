@@ -2,11 +2,11 @@
    This program calculates all of the MSbar quantities of the Standard Model, 
    using as inputs:
 
-     1) The real part of the top-quark pole mass.
+     1) The real part of the top-quark pole mass, Mt = Re[sqrt(s_pole)].
 
-     2) The real part of the Higgs boson pole masses.
+     2) The real part of the Higgs boson pole mass, Mh = Re[sqrt(s_pole)].
 
-     3) The real part of the Z boson Breit-Wigner mass.
+     3) The Z boson mass in the PDG convention.
 
      4) The strong coupling constant alpha_S in the 5-quark theory at
         Q=MZ.
@@ -67,7 +67,7 @@
                           using SMDR_Read_Values ().
 
    -e <error_tolerance>   Specifies error tolerance; if not specified,
-                          a default value of 1.0e-7 is used.
+                          a default value of 1.0e-10 is used.
 
    -Q <Q_target>          The renormalization scale at which the MSbar
                           parameters should be determined; if not
@@ -97,11 +97,11 @@
 
    for default choices with input ReferenceModel.dat, or
 
-     ./calc_fit -i SampleModelOS.dat -o SampleOutput.dat -e 1.0e-9 -Q 160
+     ./calc_fit -i SampleModelOS.dat -o SampleOutput.dat -e 1.0e-13 -Q 160
 
    or
 
-     ./calc_fit -int -o SampleOutput.dat -e 1.0e-9 -Q 160
+     ./calc_fit -int -o SampleOutput.dat -e 1.0e-13 -Q 160
 
    When running, it is important that the file ReferenceModel.dat (as
    well as the input model file, if it is different) can be found in
@@ -123,7 +123,7 @@ int main (int argc, char *argv[])
   char *varList[] = {
     "SMDR_Mt_pole",
     "SMDR_Mh_pole",
-    "SMDR_MZ_BreitWigner",
+    "SMDR_MZ_PDG",
     "SMDR_alphaS_5_MZ",
     "SMDR_alpha",
     "SMDR_Delta_alpha_had_5_MZ_in",
@@ -146,7 +146,7 @@ int main (int argc, char *argv[])
                     &interactiveMode};
 
   /* Set default values for optional args: */
-  ERROR_TOLERANCE = 1.e-7;
+  ERROR_TOLERANCE = 1.e-12;
   strcpy (inputFile, "ReferenceModel.dat");
   strcpy (outputFile, "NULL");
   Q_target = -1;
@@ -179,7 +179,7 @@ int main (int argc, char *argv[])
                    SMDR_alphaS_5_MZ,
                    SMDR_alpha,
                    SMDR_GFermi,
-                   SMDR_MZ_BreitWigner,
+                   SMDR_MZ_PDG,
                    SMDR_Mh_pole,
                    SMDR_Mt_pole,
                    SMDR_mbmb,
@@ -197,8 +197,7 @@ int main (int argc, char *argv[])
 
   printf("\n");
   printf("MW = %Lf;  (* pole mass *)\n", SMDR_MW_pole);
-  printf("MW = %Lf;  (* Breit-Wigner mass, compare to PDG *)\n",
-         SMDR_MW_BreitWigner);
+  printf("MW = %Lf;  (* PDG convention *)\n", SMDR_MW_PDG);
 
   printf("\nMSbar parameters:\n");
   SMDR_Display_MSbar_Parameters ();

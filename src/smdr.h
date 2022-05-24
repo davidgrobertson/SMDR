@@ -143,12 +143,12 @@ SMDR_REAL SMDR_Mh_pole;
 SMDR_REAL SMDR_Gammah_pole;
 SMDR_REAL SMDR_MZ_pole;
 SMDR_REAL SMDR_GammaZ_pole;
-SMDR_REAL SMDR_MZ_BreitWigner;
-SMDR_REAL SMDR_GammaZ_BreitWigner;
+SMDR_REAL SMDR_MZ_PDG;
+SMDR_REAL SMDR_GammaZ_PDG;
 SMDR_REAL SMDR_MW_pole;
 SMDR_REAL SMDR_GammaW_pole;
-SMDR_REAL SMDR_MW_BreitWigner;
-SMDR_REAL SMDR_GammaW_BreitWigner;
+SMDR_REAL SMDR_MW_PDG;
+SMDR_REAL SMDR_GammaW_PDG;
 SMDR_REAL SMDR_Mb_pole;
 SMDR_REAL SMDR_mbmb;
 SMDR_REAL SMDR_mcmc;
@@ -178,9 +178,9 @@ extern SMDR_REAL SMDR_Mt_EXPT;             /* Pole mass, has renormalon ambiguit
 extern SMDR_REAL SMDR_Mt_EXPT_UNC;
 extern SMDR_REAL SMDR_Mh_EXPT;
 extern SMDR_REAL SMDR_Mh_EXPT_UNC;
-extern SMDR_REAL SMDR_MZ_EXPT;             /* Experimental Breit-Wigner mass */
+extern SMDR_REAL SMDR_MZ_EXPT;          /* Experimental PDG convention mass */
 extern SMDR_REAL SMDR_MZ_EXPT_UNC;
-extern SMDR_REAL SMDR_MW_EXPT;             /* Experimental Breit-Wigner mass */
+extern SMDR_REAL SMDR_MW_EXPT;          /* Experimental PDG convention mass */
 extern SMDR_REAL SMDR_MW_EXPT_UNC;
 extern SMDR_REAL SMDR_mbmb_EXPT;           /* MSbar mass evaluated at itself. */
 extern SMDR_REAL SMDR_mbmb_EXPT_UNC_hi;
@@ -690,7 +690,7 @@ SMDR_REAL SMDR_Eval_vevDelta (SMDR_REAL Q_eval, float loopOrder);
 /*  Computes the Higgs pole mass. The results M_h and Gamma_h for the
     complex pole squared mass
 
-    M_h^2 - i Gamma_h M_h 
+    (Mh - i Gammah/2)^2 
 
     are returned as Mhpoleresult and Gammahpoleresult.
 
@@ -739,14 +739,15 @@ SMDR_REAL SMDR_MHPOLE_TOLERANCE;
 /* ---------------------------------------------------------------------- */
 /* ------------------------- In MW.c ------------------------------------ */
 
-/*  Computes the complex pole and Breit-Wigner squared masses of the W
-    boson, using the calculation from 1503.03782.  The argument
-    loopOrder may take the following values:
+/*  Computes the W mass and width at up to two loops with leading 3-loop QCD 
+    corrections, using the calculations from 1503.03782 and 2203.05042.  
+    The argument loopOrder may take the following values:
 
       0    tree level
       1    1-loop
       1.5  1-loop plus 2-loop QCD corrections
       2    full 2-loop
+      2.5  full 2-loop plus leading 3-loop QCD corrections
 
     If the argument Q_eval is positive, then the inputs are obtained
     by first RG running the MSbar parameter global variables:
@@ -763,31 +764,32 @@ SMDR_REAL SMDR_MHPOLE_TOLERANCE;
 
     The results for the complex pole squared mass 
 
-    M_W^2 - i Gamma_W M_W
+    (MW - i GammaW/2)^2
 
     are returned in MWpoleresult, GammaWpoleresult.
 
-    The results for the complex Breit-Wigner squared mass are also
-    returned as MWBreitWignerresult, GammaWBreitWignerresult.
+    The results for the PDG convention mass and width are also
+    returned as MWPDGresult, GammaWPDGresult.
 */
 void SMDR_Eval_MW_pole (SMDR_REAL Q_eval,
                         float loopOrder,
                         SMDR_REAL *MWpoleresult,
                         SMDR_REAL *GammaWpoleresult,
-                        SMDR_REAL *MWBreitWignerresult,
-                        SMDR_REAL *GammaWBreitWignerresult);
+                        SMDR_REAL *MWPDGresult,
+                        SMDR_REAL *GammaWPDGresult);
 
 /* ---------------------------------------------------------------------- */
 /* ------------------------- In MZ.c ------------------------------------ */
 
-/*  Computes the complex pole and Breit-Wigner squared masses of the Z
-    boson, using the calculation from 1505.04833. The argument
-    loopOrder may take the following values:
+/*  Computes the Z mass and width at up to two loops with leading 3-loop QCD
+    corrections, using the calculations from 1505.04833 and 2203.05042.
+    The argument loopOrder may take the following values:
 
       0    tree level
       1    1-loop
       1.5  1-loop plus 2-loop QCD corrections
       2    full 2-loop
+      2.5  full 2-loop plus leading 3-loop QCD corrections
 
     If the argument Q_eval is positive, then the inputs are obtained
     by first RG running the MSbar parameter global variables:
@@ -804,19 +806,19 @@ void SMDR_Eval_MW_pole (SMDR_REAL Q_eval,
 
     The results for the complex pole squared mass
 
-    M_Z^2 - i Gamma_Z M_Z
+    (MZ - i GammaZ/2)^2
 
     are returned as MZpoleresult, GammaZpoleresult.
 
-    The results for the complex Breit-Wigner squared mass are also
-    returned as MZBreitWignerresult, GammaZBreitWignerresult.
+    The results for the PDG convention mass and width are also
+    returned as MZPDGresult, GammaZPDGresult.
 */
 void SMDR_Eval_MZ_pole (SMDR_REAL Q_eval,
                         float loopOrder,
                         SMDR_REAL *MZpoleresult,
                         SMDR_REAL *GammaZpoleresult,
-                        SMDR_REAL *MZBreitWignerresult,
-                        SMDR_REAL *GammaZBreitWignerresult);
+                        SMDR_REAL *MZPDGresult,
+                        SMDR_REAL *GammaZPDGresult);
 
 /* ---------------------------------------------------------------------- */
 /* ------------------------------ In Mt.c: ------------------------------ */
@@ -834,8 +836,9 @@ void SMDR_Eval_MZ_pole (SMDR_REAL Q_eval,
 */
 
 /* Computes the complex pole mass of the top quark. The results for
-   the complex pole squared mass M_t^2 - i Gamma_t M_t are returned as
-   Mtpoleresult, Gammatpoleresult.
+   the complex pole squared mass 
+     spole = (Mt - i Gammat/2)^2 
+   are returned as Mtpoleresult, Gammatpoleresult.
 
    If the argument Q_eval is positive, then the inputs are obtained by
    first RG running the MSbar parameter global variables:
@@ -1339,7 +1342,7 @@ double SMDR_Time_Total;
 
    alphaS_target (in the 5-quark, 3-charged-lepton QCD+QED theory at Q=MZ),  
    alpha_target  (in the 5-quark, 3-charged-lepton theory at Q=MZ),  
-   MZ_target (the Z-boson Breit-Wigner mass),
+   MZ_target (the Z boson mass in the PDG convention),
    GFermi_target (the Fermi constant),
    Mh_target (the Higgs boson pole mass),
    Mt_target (the top-quark pole mass),

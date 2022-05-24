@@ -217,7 +217,7 @@ int SMDR_Set_Values_Interactively (int n, char *whichVar[])
     if (i == nVals)
       SMDR_Error (funcname, "Variable not found!", 777);
 
-    printf ("%s = ? [%.10Lf] ", whichVar[j], *varValue[i]);
+    printf ("%s = ? [%.14Lf] ", whichVar[j], *varValue[i]);
 
     fgets (tmpword, sizeof(tmpword), stdin);
 
@@ -266,9 +266,9 @@ int SMDR_Read_Model_File (char *infile)
     "SMDR_Delta_alpha_had_5_MZ_in",
     "SMDR_Mt_pole",
     "SMDR_Mh_pole",
-    "SMDR_MZ_BreitWigner",
+    "SMDR_MZ_PDG",
     "SMDR_MZ_pole",
-    "SMDR_MW_BreitWigner",
+    "SMDR_MW_PDG",
     "SMDR_MW_pole",
     "SMDR_GFermi",
     "SMDR_alpha",
@@ -351,7 +351,7 @@ int SMDR_Read_OS_Inputs (char *infile)
     "SMDR_Delta_alpha_had_5_MZ_in",
     "SMDR_Mt_pole",
     "SMDR_Mh_pole",
-    "SMDR_MZ_BreitWigner",
+    "SMDR_MZ_PDG",
     "SMDR_GFermi",
     "SMDR_alpha",
     "SMDR_alphaS_5_MZ",
@@ -413,9 +413,9 @@ int SMDR_Write_Model_File (char *outfile)
   fprintf(fp, "\n");
   fprintf(fp, "SMDR_Mt_pole = %.14Lf;\n", SMDR_Mt_pole);
   fprintf(fp, "SMDR_Mh_pole = %.14Lf;\n", SMDR_Mh_pole);
-  fprintf(fp, "SMDR_MZ_BreitWigner = %.14Lf;\n", SMDR_MZ_BreitWigner);
+  fprintf(fp, "SMDR_MZ_PDG = %.14Lf;\n", SMDR_MZ_PDG);
   fprintf(fp, "SMDR_MZ_pole = %.14Lf;\n", SMDR_MZ_pole);
-  fprintf(fp, "SMDR_MW_BreitWigner = %.14Lf;\n", SMDR_MW_BreitWigner);
+  fprintf(fp, "SMDR_MW_PDG = %.14Lf;\n", SMDR_MW_PDG);
   fprintf(fp, "SMDR_MW_pole = %.14Lf;\n", SMDR_MW_pole);
   fprintf(fp, "SMDR_GFermi = %.20Lf;\n", SMDR_GFermi);
   fprintf(fp, "SMDR_alpha = 1/%.16Lf;\n", 1./SMDR_alpha);
@@ -449,9 +449,9 @@ int SMDR_Write_Model_File (char *outfile)
   /* fprintf(fp, "SMDR_Delta_alpha_had_5_MZ_in = %.15Le;\n", (long double) SMDR_Delta_alpha_had_5_MZ_in);  */
   /* fprintf(fp, "SMDR_Mt_pole = %.15Le;\n", (long double) SMDR_Mt_pole);  */
   /* fprintf(fp, "SMDR_Mh_pole = %.15Le;\n", (long double) SMDR_Mh_pole);  */
-  /* fprintf(fp, "SMDR_MZ_BreitWigner = %.15Le;\n", (long double) SMDR_MZ_BreitWigner);  */
+  /* fprintf(fp, "SMDR_MZ_PDG = %.15Le;\n", (long double) SMDR_MZ_PDG);  */
   /* fprintf(fp, "SMDR_MZ_pole = %.15Le;\n", (long double) SMDR_MZ_pole);  */
-  /* fprintf(fp, "SMDR_MW_BreitWigner = %.15Le;\n", (long double) SMDR_MW_BreitWigner);  */
+  /* fprintf(fp, "SMDR_MW_PDG = %.15Le;\n", (long double) SMDR_MW_PDG);  */
   /* fprintf(fp, "SMDR_MW_pole = %.15Le;\n", (long double) SMDR_MW_pole);  */
   /* fprintf(fp, "SMDR_GFermi = %.15Le;\n", (long double) SMDR_GFermi);  */
   /* fprintf(fp, "SMDR_alpha = %.15Le;\n", (long double) SMDR_alpha);  */
@@ -581,7 +581,7 @@ void SMDR_Display_m2 (void)
 
 void SMDR_Write_Lambda (FILE *fp, char *prepend)
 {
-  fprintf(fp, "%sTree-level Vacuum Energy Lambda = %.6Lf = ",
+  fprintf(fp, "%sTree-level vacuum energy Lambda = %.6Lf = ",
 	  prepend, SMDR_Lambda);
 
   if (SMDR_Lambda < 0) 
@@ -622,7 +622,7 @@ void SMDR_Write_OS_Inputs (FILE *fp, char *prepend)
 {
   fprintf(fp, "%sMt = %.3Lf;\n", prepend, SMDR_Mt_pole);
   fprintf(fp, "%sMh = %.3Lf;\n", prepend, SMDR_Mh_pole);
-  fprintf(fp, "%sMZ = %.5Lf;\n", prepend, SMDR_MZ_BreitWigner);
+  fprintf(fp, "%sMZ = %.5Lf;\n", prepend, SMDR_MZ_PDG);
   fprintf(fp, "%salpha_S_5_MZ = %Lf;\n", prepend, SMDR_alphaS_5_MZ);
   fprintf(fp, "%sGFermi = %.8Lf 10^-5;\n", prepend, 100000 * SMDR_GFermi);
   fprintf(fp, "%salpha = 1/%.8Lf;\n", prepend, 1./SMDR_alpha);

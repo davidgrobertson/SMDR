@@ -96,7 +96,7 @@ int  SMDR_Fit_Inputs (SMDR_REAL Q_target,
 
     KZ = (SMDR_g_in * SMDR_g_in + SMDR_gp_in * SMDR_gp_in) * 
          (MZ_target * MZ_target)/
-         (SMDR_MZ_BreitWigner * SMDR_MZ_BreitWigner * v2ratio);
+         (SMDR_MZ_PDG * SMDR_MZ_PDG * v2ratio);
 
     Ka = ((SMDR_g_in * SMDR_g_in * SMDR_gp_in * SMDR_gp_in)/
           (SMDR_g_in * SMDR_g_in + SMDR_gp_in * SMDR_gp_in)) * 
@@ -205,7 +205,7 @@ int  SMDR_Fit_Inputs (SMDR_REAL Q_target,
 
     err_alphaS = SMDR_alphaS_5_MZ/alphaS_5_MZ_target - 1.;
     err_alpha = SMDR_alpha/alpha_target - 1.;
-    err_MZ = SMDR_MZ_BreitWigner/MZ_target - 1.;
+    err_MZ = SMDR_MZ_PDG/MZ_target - 1.;
     err_GFermi = SMDR_GFermi/GFermi_target - 1.;
     err_Mh = SMDR_Mh_pole/Mh_target - 1.;
     err_Mt = SMDR_Mt_pole/Mt_target - 1.;
@@ -274,14 +274,14 @@ int  SMDR_Fit_Inputs (SMDR_REAL Q_target,
     SMDR_Eval_Mt_pole (SMDR_Mt_EXPT, 1, 4, 2, &SMDR_Mt_pole, &SMDR_Gammat_pole);
     SMDR_Eval_Mh_pole (160., 2.5, &SMDR_Mh_pole, &SMDR_Gammah_pole);
     SMDR_Eval_MZ_pole (160., 2.5, &SMDR_MZ_pole, &SMDR_GammaZ_pole,
-                       &SMDR_MZ_BreitWigner, &SMDR_GammaZ_BreitWigner);
+                       &SMDR_MZ_PDG, &SMDR_GammaZ_PDG);
 
     /* This one is computed only because it is needed by SMDR_Eval_Gauge() */
     SMDR_Eval_MW_pole (160., 2.5, &SMDR_MW_pole, &SMDR_GammaW_pole,
-                       &SMDR_MW_BreitWigner, &SMDR_GammaW_BreitWigner);
+                       &SMDR_MW_PDG, &SMDR_GammaW_PDG);
 
     SMDR_GFermi = SMDR_Eval_GFermi (SMDR_Mt_EXPT, 2);
-    SMDR_Eval_Gauge (SMDR_Mt_pole, SMDR_Mh_pole, SMDR_MW_BreitWigner);
+    SMDR_Eval_Gauge (SMDR_Mt_pole, SMDR_Mh_pole, SMDR_MW_PDG);
     SMDR_Eval_QCDQED_at_MZ (SMDR_MZ_EXPT, SMDR_MZ_EXPT, 5);
 
     if (mbmb_target > SMDR_TOL) 
@@ -315,7 +315,7 @@ int  SMDR_Fit_Inputs (SMDR_REAL Q_target,
     printf("\n");
     printf("SMDR_Mt_pole = %.14Lf;         frac. err. = %.10Lf\n", SMDR_Mt_pole, err_Mt);
     printf("SMDR_Mh_pole = %.14Lf;         frac. err. = %.10Lf\n", SMDR_Mh_pole, err_Mh);
-    printf("SMDR_MZ_BreitWigner = %.14Lf;   frac. err. = %.10Lf\n", SMDR_MZ_BreitWigner, err_MZ);
+    printf("SMDR_MZ_PDG = %.14Lf;   frac. err. = %.10Lf\n", SMDR_MZ_PDG, err_MZ);
     printf("SMDR_GFermi = %.20Lf;      frac. err. = %.10Lf\n", SMDR_GFermi, err_GFermi);
     printf("SMDR_alpha = 1/%.16Lf;         frac. err. = %.10Lf\n",1/SMDR_alpha, err_alpha);
     printf("SMDR_alphaS_5_MZ = %.16Lf;       frac. err. = %.10Lf\n",SMDR_alphaS_5_MZ, err_alphaS);
@@ -391,7 +391,7 @@ void SMDR_Make_Accelcoeffs ()
                    (1. + delt) * (1. + delt) * SMDR_alphaS_5_MZ,
                    SMDR_alpha,
                    SMDR_GFermi,
-                   SMDR_MZ_BreitWigner,
+                   SMDR_MZ_PDG,
                    SMDR_Mh_pole,
                    SMDR_Mt_pole,
                    SMDR_mbmb,
@@ -422,7 +422,7 @@ void SMDR_Make_Accelcoeffs ()
                    (1. - delt) * (1. - delt) * SMDR_alphaS_5_MZ,
                    SMDR_alpha,
                    SMDR_GFermi,
-                   SMDR_MZ_BreitWigner,
+                   SMDR_MZ_PDG,
                    SMDR_Mh_pole,
                    SMDR_Mt_pole,
                    SMDR_mbmb,
@@ -458,7 +458,7 @@ void SMDR_Make_Accelcoeffs ()
                    SMDR_alphaS_5_MZ,
                    SMDR_alpha,
                    SMDR_GFermi,
-                   SMDR_MZ_BreitWigner,
+                   SMDR_MZ_PDG,
                    SMDR_Mh_pole,
                    (1. + delt) * SMDR_Mt_pole,
                    SMDR_mbmb,
@@ -489,7 +489,7 @@ void SMDR_Make_Accelcoeffs ()
                    SMDR_alphaS_5_MZ,
                    SMDR_alpha,
                    SMDR_GFermi,
-                   SMDR_MZ_BreitWigner,
+                   SMDR_MZ_PDG,
                    SMDR_Mh_pole,
                    (1. - delt) * SMDR_Mt_pole,
                    SMDR_mbmb,
@@ -525,7 +525,7 @@ void SMDR_Make_Accelcoeffs ()
                    SMDR_alphaS_5_MZ,
                    SMDR_alpha,
                    SMDR_GFermi,
-                   SMDR_MZ_BreitWigner,
+                   SMDR_MZ_PDG,
                    SMDR_Mh_pole,
                    SMDR_Mt_pole,
                    (1. + delt) * SMDR_mbmb,
@@ -552,7 +552,7 @@ void SMDR_Make_Accelcoeffs ()
                    SMDR_alphaS_5_MZ,
                    SMDR_alpha,
                    SMDR_GFermi,
-                   SMDR_MZ_BreitWigner,
+                   SMDR_MZ_PDG,
                    SMDR_Mh_pole,
                    SMDR_Mt_pole,
                    (1. - delt) * SMDR_mbmb,
@@ -584,7 +584,7 @@ void SMDR_Make_Accelcoeffs ()
                    SMDR_alphaS_5_MZ,
                    SMDR_alpha,
                    SMDR_GFermi,
-                   SMDR_MZ_BreitWigner,
+                   SMDR_MZ_PDG,
                    SMDR_Mh_pole,
                    SMDR_Mt_pole,
                    SMDR_mbmb,
@@ -607,7 +607,7 @@ void SMDR_Make_Accelcoeffs ()
                    SMDR_alphaS_5_MZ,
                    SMDR_alpha,
                    SMDR_GFermi,
-                   SMDR_MZ_BreitWigner,
+                   SMDR_MZ_PDG,
                    SMDR_Mh_pole,
                    SMDR_Mt_pole,
                    SMDR_mbmb,

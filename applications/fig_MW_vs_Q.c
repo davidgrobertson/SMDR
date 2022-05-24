@@ -1,7 +1,7 @@
 /* 
    Calculates the physical mass of the W boson as a function of the
    MSbar renormalization scale Q at which it is computed, in various
-   approximations, using the results in 1503.03782. The input
+   approximations, using the results in 1503.03782 and 2203.05042. The input
    parameters are obtained from the file "ReferenceModel.dat" unless a
    different file is specified using the "-i" option; see below.
 
@@ -9,34 +9,38 @@
    with data in 18 columns:
 
    1  Q  (MSbar renormalization scale)
-   2  MW_pole            (loopOrder = 0, tree-level)
-   3  MW_pole            (loopOrder = 1, 1-loop)
-   4  MW_BreitWigner     (loopOrder = 1, 1-loop)
-   5  GammaW_pole        (loopOrder = 1, 1-loop)
-   6  GammaW_BreitWigner (loopOrder = 1, 1-loop)
-   7  MW_pole            (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   8  MW_BreitWigner     (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   9  GammaW_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   10 GammaW_BreitWigner (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   11 MW_pole            (loopOrder = 2, full 2-loop)
-   12 MW_BreitWigner     (loopOrder = 2, full 2-loop)
-   13 GammaW_pole        (loopOrder = 2, full 2-loop)
-   14 GammaW_BreitWigner (loopOrder = 2, full 2-loop)
-   15 MW_pole            (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   16 MW_BreitWigner     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   17 GammaW_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   18 GammaW_BreitWigner (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   2  MW_pole        (loopOrder = 0, tree-level)
+   3  MW_pole        (loopOrder = 1, 1-loop)
+   4  MW_PDG         (loopOrder = 1, 1-loop)
+   5  GammaW_pole    (loopOrder = 1, 1-loop)
+   6  GammaW_PDG     (loopOrder = 1, 1-loop)
+   7  MW_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   8  MW_PDG         (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   9  GammaW_pole    (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   10 GammaW_PDG     (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   11 MW_pole        (loopOrder = 2, full 2-loop)
+   12 MW_PDG         (loopOrder = 2, full 2-loop)
+   13 GammaW_pole    (loopOrder = 2, full 2-loop)
+   14 GammaW_PDG     (loopOrder = 2, full 2-loop)
+   15 MW_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   16 MW_PDG         (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   17 GammaW_pole    (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   18 GammaW_PDG     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
 
-   where the complex pole squared mass is:
+   where, as of version 1.2, the complex pole squared mass is:
 
-   s_pole = MW_pole^2 - i GammaW MW.
+   s_pole = (MW_pole - i GammaW_pole/2)^2.
 
-   Note that the Breit-Wigner mass reported by experimentalists is
-   related by
- 
-   MW_BreitWigner^2 = MW_pole^2 + GammaW^2
+   Note that the PDG convention mass and width usually reported by
+   experimentalists for the X = W and Z masses are related to the pole mass
+   and width by
 
-   so that MW_BreitWigner is approximately 27 MeV larger than MW.
+   MX_PDG = MX_pole (1 + delta)/sqrt(1 - delta)
+   GammaX_PDG = GammaX_pole (1 + delta)/(1 - delta)^(3/2)
+
+   where delta = (GammaX_pole^2)/(4 MX_pole^2), so that
+   MW_PDG is approximately 20.4 MeV larger than MW_pole, and
+   MZ_PDG is approximately 25.6 MeV larger than MZ_pole.
 
    In the paper: arXiv:1907.02500
    Standard Model parameters in the tadpole-free pure MSbar scheme
@@ -93,24 +97,24 @@ int main (int argc, char *argv[])
   void *argvar[] = {inFileName, outFileName};
 
   char *columnDescriptor[] = {
-    "1  Q                  (MSbar renormalization scale)",
-    "2  MW_pole            (loopOrder = 0, tree-level)",
-    "3  MW_pole            (loopOrder = 1, 1-loop)",
-    "4  MW_BreitWigner     (loopOrder = 1, 1-loop)",
-    "5  GammaW_pole        (loopOrder = 1, 1-loop)",
-    "6  GammaW_BreitWigner (loopOrder = 1, 1-loop)",
-    "7  MW_pole            (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
-    "8  MW_BreitWigner     (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
-    "9  GammaW_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
-    "10 GammaW_BreitWigner (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
-    "11 MW_pole            (loopOrder = 2, full 2-loop)",
-    "12 MW_BreitWigner     (loopOrder = 2, full 2-loop)",
-    "13 GammaW_pole        (loopOrder = 2, full 2-loop)",
-    "14 GammaW_BreitWigner (loopOrder = 2, full 2-loop)",
-    "15 MW_pole            (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
-    "16 MW_BreitWigner     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
-    "17 GammaW_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
-    "18 GammaW_BreitWigner (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
+    "1  Q              (MSbar renormalization scale)",
+    "2  MW_pole        (loopOrder = 0, tree-level)",
+    "3  MW_pole        (loopOrder = 1, 1-loop)",
+    "4  MW_PDG         (loopOrder = 1, 1-loop)",
+    "5  GammaW_pole    (loopOrder = 1, 1-loop)",
+    "6  GammaW_PDG     (loopOrder = 1, 1-loop)",
+    "7  MW_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
+    "8  MW_PDG         (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
+    "9  GammaW_pole    (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
+    "10 GammaW_PDG     (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
+    "11 MW_pole        (loopOrder = 2, full 2-loop)",
+    "12 MW_PDG         (loopOrder = 2, full 2-loop)",
+    "13 GammaW_pole    (loopOrder = 2, full 2-loop)",
+    "14 GammaW_PDG     (loopOrder = 2, full 2-loop)",
+    "15 MW_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
+    "16 MW_PDG         (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
+    "17 GammaW_pole    (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
+    "18 GammaW_PDG     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
     "",
     "In the paper: arXiv:1907.02500",
     "Standard Model parameters in the tadpole-free pure MSbar scheme",
@@ -162,36 +166,36 @@ int main (int argc, char *argv[])
     fprintf (outfile, "%.1Lf", Q);  
 
     SMDR_Eval_MW_pole (-1, 0, &SMDR_MW_pole, &SMDR_GammaW_pole,
-                              &SMDR_MW_BreitWigner, &SMDR_GammaW_BreitWigner);
+                              &SMDR_MW_PDG, &SMDR_GammaW_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_MW_pole);
 
     SMDR_Eval_MW_pole (-1, 1, &SMDR_MW_pole, &SMDR_GammaW_pole,
-                              &SMDR_MW_BreitWigner, &SMDR_GammaW_BreitWigner);
+                              &SMDR_MW_PDG, &SMDR_GammaW_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_MW_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_MW_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_MW_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_GammaW_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_GammaW_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_GammaW_PDG);
 
     SMDR_Eval_MW_pole (-1, 1.5, &SMDR_MW_pole, &SMDR_GammaW_pole,
-                                &SMDR_MW_BreitWigner, &SMDR_GammaW_BreitWigner);
+                                &SMDR_MW_PDG, &SMDR_GammaW_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_MW_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_MW_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_MW_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_GammaW_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_GammaW_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_GammaW_PDG);
 
     SMDR_Eval_MW_pole (-1, 2, &SMDR_MW_pole, &SMDR_GammaW_pole,
-                              &SMDR_MW_BreitWigner, &SMDR_GammaW_BreitWigner);
+                              &SMDR_MW_PDG, &SMDR_GammaW_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_MW_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_MW_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_MW_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_GammaW_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_GammaW_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_GammaW_PDG);
 
     SMDR_Eval_MW_pole (-1, 2.5, &SMDR_MW_pole, &SMDR_GammaW_pole,
-                                &SMDR_MW_BreitWigner, &SMDR_GammaW_BreitWigner);
+                                &SMDR_MW_PDG, &SMDR_GammaW_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_MW_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_MW_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_MW_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_GammaW_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_GammaW_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_GammaW_PDG);
 
     fprintf (outfile, "\n");
     fflush (outfile);

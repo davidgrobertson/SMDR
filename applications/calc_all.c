@@ -5,11 +5,15 @@
         top quark, using the state-of-the-art approximations for
         each. This means full 2-loop plus leading 3-loop order for the
         Higgs, full 2-loop for W and Z, and 4-loop pure QCD plus full
-        2-loop for the top quark.  Also given for the W and Z bosons
-        are the Breit-Wigner masses as usually quoted by
-        experimentalists:
-          MW_BreitWigner = sqrt(MW^2 + GammaW^2) and 
-          MZ_BreitWigner = sqrt(MZ^2 + GammaZ^2).
+        2-loop for the top quark. The pole masses MX and GammaX (for 
+        X = W, Z, top, and Higgs) are defined (starting with version 1.2)
+        by s_pole = (MX - i GammaX/2)^2. Also given for the W and Z bosons 
+        are the PDG convention masses as usually quoted by experimentalists, 
+        which are related to the pole masses by
+          MX_PDG = MX (1 + delta)/sqrt(1 - delta)
+        and
+          GammaX_PDG = GammaX (1 + delta)/(1 - delta)^(3/2)
+        where delta = (GammaX^2)/(4 MX^2).
 
      2) The MSbar quantities alpha_S(Q), alpha(Q), and sin^2_W(Q)
         at Q = MZ, in the full Standard Model with nothing decoupled.
@@ -197,13 +201,13 @@ int main (int argc, char *argv[])
   /* Higgs boson pole mass. */
   SMDR_Eval_Mh_pole (160., 2.5, &SMDR_Mh_pole, &SMDR_Gammah_pole);
 
-  /* Z boson pole and Breit-Wigner masses */
+  /* Z boson pole and PDG convention masses */
   SMDR_Eval_MZ_pole (160., 2.5, &SMDR_MZ_pole, &SMDR_GammaZ_pole,
-                     &SMDR_MZ_BreitWigner, &SMDR_GammaZ_BreitWigner);
+                     &SMDR_MZ_PDG, &SMDR_GammaZ_PDG);
 
-  /* W boson pole and Breit-Wigner masses */
+  /* W boson pole and PDG convention masses */
   SMDR_Eval_MW_pole (160., 2.5, &SMDR_MW_pole, &SMDR_GammaW_pole,
-                     &SMDR_MW_BreitWigner, &SMDR_GammaW_BreitWigner);
+                     &SMDR_MW_PDG, &SMDR_GammaW_PDG);
 
   /* GFermi */
   SMDR_GFermi = SMDR_Eval_GFermi (SMDR_Mt_EXPT, 2);
@@ -212,7 +216,7 @@ int main (int argc, char *argv[])
      theory, Sommerfeld fine structure constant alpha, alpha(MZ) and
      sin^2(thetaW) in PDG MSbar scheme with only top decoupled.
   */
-  SMDR_Eval_Gauge (SMDR_Mt_pole, SMDR_Mh_pole, SMDR_MW_BreitWigner);
+  SMDR_Eval_Gauge (SMDR_Mt_pole, SMDR_Mh_pole, SMDR_MW_PDG);
 
   /* MSbar parameters in 5-quark, 3-lepton QCDQED theory at MZ */
   SMDR_Eval_QCDQED_at_MZ (SMDR_MZ_EXPT, SMDR_MZ_EXPT, 5);
@@ -255,13 +259,13 @@ int main (int argc, char *argv[])
 
   printf("MZ = %Lf;  GammaZ = %Lf;   (* complex pole *)\n",
          SMDR_MZ_pole, SMDR_GammaZ_pole);
-  printf("MZ = %Lf;  GammaZ = %Lf;   (* Breit-Wigner, compare to PDG *)\n\n",
-         SMDR_MZ_BreitWigner, SMDR_GammaZ_BreitWigner);
+  printf("MZ = %Lf;  GammaZ = %Lf;   (* PDG convention *)\n\n",
+         SMDR_MZ_PDG, SMDR_GammaZ_PDG);
 
   printf("MW = %Lf;  GammaW = %Lf;   (* complex pole *)\n",
           SMDR_MW_pole, SMDR_GammaW_pole);
-  printf("MW = %Lf;  GammaW = %Lf;   (* Breit-Wigner, compare to PDG *)\n\n",
-          SMDR_MW_BreitWigner, SMDR_GammaW_BreitWigner);
+  printf("MW = %Lf;  GammaW = %Lf;   (* PDG convention *)\n\n",
+          SMDR_MW_PDG, SMDR_GammaW_PDG);
 
   printf("MSbar quantities at Q = MZ, full Standard Model, nothing decoupled:\n");
   printf("  alphaS = %Lf; ", SMDR_alphaS_MZ);
@@ -310,7 +314,7 @@ int main (int argc, char *argv[])
   /*
   SMDR_GFermi_DGG = SMDR_Eval_GFermi_DGG (SMDR_Mt_pole, 
                                           SMDR_Mh_pole,  
-                                          SMDR_MW_BreitWigner);
+                                          SMDR_MW_PDG);
   printf("        alternate version GFermi_DGG = %.8Lf 10^-5;\n", 100000 * SMDR_GFermi_DGG);
   */
 

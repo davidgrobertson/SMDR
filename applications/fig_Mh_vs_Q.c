@@ -1,7 +1,7 @@
 /* 
    Calculates the Higgs pole mass as a function of the MSbar
    renormalization scale Q at which it is computed, in various
-   approximations, using the results in 1407.4336. The input
+   approximations, using the results in 1407.4336 and 2203.05042. The input
    parameters are obtained from the file "ReferenceModel.dat" unless a
    different file is specified using the "-i" option; see below.
 
@@ -15,6 +15,9 @@
    5  Mh (loopOrder = 2, full 2-loop) 
    6  Mh (loopOrder = 2.3, includes 3-loop QCD) 
    7  Mh (loopOrder = 2.5, includes 3-loop QCD and yt corrections) 
+
+   where, as of version 1.2, Mh is the real part of the square root of the
+   complex pole squared mass.
 
    In the paper: arXiv:1907.02500
    Standard Model parameters in the tadpole-free pure MSbar scheme

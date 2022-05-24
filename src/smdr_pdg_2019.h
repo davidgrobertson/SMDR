@@ -36,11 +36,11 @@ SMDR_REAL SMDR_Mt_EXPT_UNC = 0.9;
 SMDR_REAL SMDR_Mh_EXPT =   125.10;
 SMDR_REAL SMDR_Mh_EXPT_UNC = 0.14;
 
-/* Z-boson Breit-Wigner mass. June 2019 pdgLive */
+/* Z-boson PDG convention mass. June 2019 pdgLive */
 SMDR_REAL SMDR_MZ_EXPT =    91.1876; 
 SMDR_REAL SMDR_MZ_EXPT_UNC = 0.0021;
 
-/* W-boson Breit-Wigner mass. June 2019 pdgLive */
+/* W-boson PDG convention mass. June 2019 pdgLive */
 SMDR_REAL SMDR_MW_EXPT =    80.379;  
 SMDR_REAL SMDR_MW_EXPT_UNC = 0.012;
 

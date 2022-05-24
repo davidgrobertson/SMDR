@@ -1,7 +1,8 @@
 /* 
    Higgs self-energy functions and complex pole mass calculation. 
    The computation uses equations (2.43), (2.46)-(2.48), and (3.2)-(3.4) of
-   arXiv:1407.4336. The argument loopOrder has allowed values:
+   arXiv:1407.4336, and the results from 2203.05042. 
+   The argument loopOrder has allowed values:
 
    0    tree level
    1    1-loop level
@@ -174,7 +175,7 @@ void SMDR_Eval_Mh_pole (SMDR_REAL Q_eval,
                         SMDR_REAL *Mhpoleresult,
                         SMDR_REAL *Gammahpoleresult)
 {
-  SMDR_COMPLEX se, CM2, last;
+  SMDR_COMPLEX se, CM2h, last;
   SMDR_REAL PM_TOL;
   int i;
   char funcname[] = "SMDR_Eval_Mh_pole";
@@ -213,7 +214,7 @@ void SMDR_Eval_Mh_pole (SMDR_REAL Q_eval,
 
   /* If higher order, we iterate... */
   /* Starting value: */
-  CM2 = h;
+  CM2h = h;
 
   /* Evaluate the integrals that don't depend on s. */
   SMDR_Mh_DoTSIL_nos ();
@@ -222,23 +223,23 @@ void SMDR_Eval_Mh_pole (SMDR_REAL Q_eval,
       be re-evaluated on each iteration. */
   if (loopOrder > 1.999) SMDR_Mh_DoTSIL_2loopnonQCD (h);
 
-  /* Now we find the complex pole mass CM2 by iteration. */
+  /* Now we find the complex pole mass CM2h by iteration. */
   for (i=0; i<MAXITERS; i++) {
 
     if (loopOrder < 0.999) break;
 
-    last = CM2;
+    last = CM2h;
 
     /* Perform needed TSIL evaluations of 1-loop integrals. */
-    SMDR_Mh_DoTSIL_1loop (SMDR_CREAL(CM2));
+    SMDR_Mh_DoTSIL_1loop (SMDR_CREAL(CM2h));
 
-    se = ONELOOPFACTOR * SMDR_Mh_Pi1 (SMDR_CREAL(CM2));
+    se = ONELOOPFACTOR * SMDR_Mh_Pi1 (SMDR_CREAL(CM2h));
 
     if (loopOrder > 1.499) {
       /* Perform needed TSIL evaluations of 2-loop integrals that
          are enhanced by QCD couplings. */
-      SMDR_Mh_DoTSIL_2loopQCD (SMDR_CREAL(CM2));
-      se += TWOLOOPFACTOR * SMDR_Mh_Pi2QCD (SMDR_CREAL(CM2));
+      SMDR_Mh_DoTSIL_2loopQCD (SMDR_CREAL(CM2h));
+      se += TWOLOOPFACTOR * SMDR_Mh_Pi2QCD (SMDR_CREAL(CM2h));
     }
 
     if (loopOrder > 1.999) 
@@ -250,19 +251,19 @@ void SMDR_Eval_Mh_pole (SMDR_REAL Q_eval,
     if (loopOrder > 2.499)
       se += THREELOOPFACTOR * SMDR_Mh_Pi3nonQCD ();
 
-    /* New pole mass for the iteraction is: */
-    CM2 = h + se;
+    /* New pole squared mass for the iteraction is: */
+    CM2h = h + se;
 
     /* If the pole mass didn't change by too much in this iteration, then
        we are done. */
-    if (TSIL_CABS((CM2 - last)/last) < PM_TOL) break;
+    if (TSIL_CABS((CM2h - last)/last) < PM_TOL) break;
   }
 
   if (i == MAXITERS)
     SMDR_Warn (funcname, "Too many iterations! Convergence not assured.");
 
-  *Mhpoleresult = SMDR_SQRT(SMDR_CREAL(CM2));
-  *Gammahpoleresult = -SMDR_CIMAG(CM2)/(*Mhpoleresult);
+  *Mhpoleresult = SMDR_CREAL(SMDR_CSQRT(CM2h));
+  *Gammahpoleresult = -2.0 * SMDR_CIMAG(SMDR_CSQRT(CM2h));
 
   return;
 }
@@ -291,6 +292,7 @@ SMDR_REAL SMDR_Eval_lambda (SMDR_REAL Q_eval,
   SMDR_REAL m2hpole = mhpole*mhpole, lam, orig, last;
   SMDR_COMPLEX se;
   SMDR_REAL PM_TOL;
+  SMDR_REAL tinycorrection;
   int i;
   char funcname[] = "SMDR_Eval_lambda";
 
@@ -362,8 +364,10 @@ SMDR_REAL SMDR_Eval_lambda (SMDR_REAL Q_eval,
     if (loopOrder > 2.499)
       se += THREELOOPFACTOR * SMDR_Mh_Pi3nonQCD ();
 
+    tinycorrection = SMDR_CIMAG(se) * SMDR_CIMAG(se)/(4. * m2hpole);
+
     /* New estimate is: */
-    lam = 0.5*(m2hpole - SMDR_CREAL(se))/v2;
+    lam = 0.5*(m2hpole - SMDR_CREAL(se) - tinycorrection)/v2;
 
     if (TSIL_FABS((lam - last)/last) < PM_TOL) break;
   }
@@ -1064,9 +1068,10 @@ SMDR_COMPLEX SMDR_Mh_Pi2nonQCD ()
 
 /* -------------------------------------------------------------------- */
 /* -------------------------------------------------------------------- */
-/* Partial 3-loop self energy function for SM Higgs; leading QCD terms. */
-/* 1407.4336 equation (3.3) and new s-dependent terms in the g3^4 part. */
-
+/* Partial 3-loop self energy function for SM Higgs; leading QCD terms. 
+   1407.4336 equation (3.3) and new s-dependent terms in the g3^4 part, 
+   from 2203.05042.                                                    
+*/
 SMDR_COMPLEX SMDR_Mh_Pi3QCD ()
 {
   SMDR_COMPLEX g34part, g32part;
@@ -1159,9 +1164,7 @@ SMDR_COMPLEX SMDR_Mh_Pi3QCD ()
 /* ----------------------------------------------------------------- */
 /* ----------------------------------------------------------------- */
 /* Partial 3-loop self energy function for H; leading non-QCD terms. */
-/* 1407.4336 equation (3.4), after revisions given in the paper
-   "Three-loop QCD corrections to the electroweak boson masses",
-    arXiv preprint number not available yet.
+/* 1407.4336 equation (3.4), after revisions from 2203.05042.
 */
 
 SMDR_COMPLEX SMDR_Mh_Pi3nonQCD ()

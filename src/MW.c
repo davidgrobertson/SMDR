@@ -1,4 +1,6 @@
-/* W boson complex pole mass calculation from 1503.03782. */
+/* W boson complex pole mass calculation from 1503.03782 (full 2-loop) and
+   2203.05042 (3-loop QCD). 
+*/
 
 #include "smdr_internal.h"
 
@@ -131,33 +133,49 @@ SMDR_COMPLEX AW, AZ, Ah, At, Ab, Atau,
 
 /* ---------------------------------------------------------------- */
 /* ---------------------------------------------------------------- */
-/*  Computes W mass at up to two loops, from 1503.03782. 
-    The argument
-    loopOrder may take the folowing values:
+/*  Computes the W mass and width at up to two loops with leading 3-loop QCD 
+    corrections, using the calculations from 1503.03782 and 2203.05042.  
+    The argument loopOrder may take the following values:
 
-    0    tree level
-    1    1-loop
-    1.5  1-loop plus 2-loop QCD corrections
-    2    full 2-loop
-    2.5  full 2-loop plus leading 3-loop QCD corrections
+      0    tree level
+      1    1-loop
+      1.5  1-loop plus 2-loop QCD corrections
+      2    full 2-loop
+      2.5  full 2-loop plus leading 3-loop QCD corrections
 
-    Results are used to set the global variables:
+    If the argument Q_eval is positive, then the inputs are obtained
+    by first RG running the MSbar parameter global variables:
 
-    SMDR_MW_pole,
-    SMDR_GammaW_pole,
-    SMDR_MW_BreitWigner,
-    SMDR_GammaW_BreitWigner
+    Q_in, g3_in, g_in, gp_in, yt_in, ..., v_in
+
+    to the scale Q_eval, using SMDR_RGeval_SM().
+
+    If the argument Q_eval is negative, then the inputs are instead
+    given by the current values of the MSbar parameter global
+    variables:
+
+    Q, g3, g, gp, yt, ..., v.
+
+    The results MW and GammaW for the complex pole squared mass defined by,
+    as of version 1.2,
+
+    spole_W = (MW - i GammaW/2)^2
+
+    are returned in MWpoleresult, GammaWpoleresult.
+
+    The results for the PDG convention mass and width are also
+    returned as MWPDGresult, GammaWPDGresult.
 */
-
 void SMDR_Eval_MW_pole (SMDR_REAL Q_eval,
                         float loopOrder, 
                         SMDR_REAL *MWpoleresult, 
                         SMDR_REAL *GammaWpoleresult,
-                        SMDR_REAL *MWBreitWignerresult, 
-                        SMDR_REAL *GammaWBreitWignerresult)
+                        SMDR_REAL *MWPDGresult, 
+                        SMDR_REAL *GammaWPDGresult)
 {
   SMDR_COMPLEX CM2W;
   char funcname[] = "SMDR_Eval_MW_pole";
+  SMDR_REAL MW2poleold, MWpoleold, GammaWpoleold;
 
   /* If Q_eval is negative, then we just use the current Q.
      Otherwise, we run all the parameters from Q_in to Q_eval. */
@@ -205,16 +223,17 @@ void SMDR_Eval_MW_pole (SMDR_REAL Q_eval,
   if (loopOrder > 2.499)
     CM2W += THREELOOPFACTOR * SMDR_MW_3loopQCD ();
   
-  *MWpoleresult = SMDR_SQRT(SMDR_CREAL(CM2W));
+  *MWpoleresult = SMDR_CREAL(SMDR_CSQRT(CM2W));
+  *GammaWpoleresult = -2.0 * SMDR_CIMAG(SMDR_CSQRT(CM2W));
 
-  *GammaWpoleresult = -SMDR_CIMAG(CM2W)/(*MWpoleresult);
+  /* These correspond to the convention used in v1.1 and earlier versions.
+     They are now used only as intermediate steps. */
+  MW2poleold = SMDR_CREAL(CM2W);
+  MWpoleold = SMDR_SQRT(MW2poleold);
+  GammaWpoleold = -SMDR_CIMAG(CM2W)/(MWpoleold);
 
-  *MWBreitWignerresult = SMDR_SQRT(
-    (*MWpoleresult) * (*MWpoleresult) + 
-    (*GammaWpoleresult) * (*GammaWpoleresult));
-
-  *GammaWBreitWignerresult = (*GammaWpoleresult) * (*MWpoleresult)/
-    (*MWBreitWignerresult);
+  *MWPDGresult = SMDR_SQRT(MW2poleold + GammaWpoleold * GammaWpoleold);
+  *GammaWPDGresult = GammaWpoleold * (*MWPDGresult)/MWpoleold;
 
   return;
 }
@@ -1350,8 +1369,7 @@ int SMDR_MW_DoTSILW (float loopOrder)
 
 /* ------------------------------------------------------------------- */
 /* ------------------------------------------------------------------- */
-/* Three-loop W boson pole mass QCD contribution.                      */
-/* New in v1.1.                                                        */
+/* 3-loop W boson pole mass QCD contribution from 2203.05042, new in v1.1 */
 
 SMDR_COMPLEX SMDR_MW_3loopQCD (void)
 {

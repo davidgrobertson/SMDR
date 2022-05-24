@@ -1,5 +1,5 @@
                      ********************************
-		           Welcome to SMDR v1.1
+		           Welcome to SMDR v1.2
                      ********************************
 
 Copyright (C) 2019 S.P. Martin and D.G. Robertson
@@ -123,7 +123,7 @@ SMDR is available from:
        http://www.niu.edu/spmartin/SMDR
        http://faculty.otterbein.edu/drobertson/SMDR
 
-Version number: 1.1
+Version number: 1.2
 
 
 ********************************************************************* 
@@ -351,9 +351,9 @@ To use SMDR functions in your code, you must:
           SMDR_Mt_pole;
           SMDR_Mh_pole;
           SMDR_MZ_pole;
-          SMDR_MZ_BreitWigner;
+          SMDR_MZ_PDG;
           SMDR_MW_pole;
-          SMDR_MW_BreitWigner;
+          SMDR_MW_PDG;
           SMDR_mbmb;
           SMDR_mcmc;
           SMDR_ms_2GeV;
@@ -385,9 +385,9 @@ To use SMDR functions in your code, you must:
           SMDR_Mt_EXPT_UNC;
           SMDR_Mh_EXPT;
           SMDR_Mh_EXPT_UNC;
-          SMDR_MZ_EXPT;             /* Experimental Breit-Wigner mass */
+          SMDR_MZ_EXPT;             /* Experimental PDG convention mass */
           SMDR_MZ_EXPT_UNC;
-          SMDR_MW_EXPT;             /* Experimental Breit-Wigner mass */
+          SMDR_MW_EXPT;             /* Experimental PDG convention mass */
           SMDR_MW_EXPT_UNC;
           SMDR_mbmb_EXPT;           /* MSbar mass evaluated at itself. */
           SMDR_mbmb_EXPT_UNC_hi;
@@ -455,11 +455,15 @@ This program calculates and prints:
      quark, using the state-of-the-art approximations for each. This
      means full 2-loop plus leading 3-loop order for the Higgs, full
      2-loop plus 3-loop QCD for W and Z, and 4-loop pure QCD plus full 
-     2-loop for the top quark.  Also given for the W and Z bosons are the
-     Breit-Wigner masses as usually quoted by experimentalists:
-       MW_BreitWigner = sqrt(MW^2 + GammaW^2) and 
-       MZ_BreitWigner = sqrt(MZ^2 + GammaZ^2).
-
+     2-loop for the top quark. The pole masses MX and GammaX 
+     (for X = W, Z, top, and Higgs) are defined, starting with version 1.2,
+     by s_pole = (MX - i GammaX/2)^2. Also given for the W and Z bosons are the
+     PDG convention masses as usually quoted by experimentalists, which are
+     related to the pole masses by
+       MX_PDG = MX (1 + delta)/sqrt(1 - delta) 
+     and 
+       GammaX_PDG = GammaX (1 + delta)/(1 - delta)^(3/2) 
+     where delta = (GammaX^2)/(4 MX^2).
   2) The MSbar quantities alpha_S(Q), alpha(Q), and sin^2_W(Q) at Q =
      MZ, in the full Standard Model with nothing decoupled.
   3) The MSbar quantities alpha_S(Q), alpha(Q), and sin^2_W(Q), at Q =
@@ -556,9 +560,9 @@ calc_fit (Source file: calc_fit.c)
 This program calculates all of the MSbar quantities of the Standard
 Model, using as inputs:
 
-  1) The real part of the top-quark pole mass.
-  2) The real part of the Higgs boson pole masses.
-  3) The real part of the Z boson Breit-Wigner mass.
+  1) The real part of the top-quark pole mass, Mt = Re[sqrt(s_pole)].
+  2) The real part of the Higgs boson pole mass, Mh = Re[sqrt(s_pole)].
+  3) The Z boson mass in the PDG convention.
   4) The strong coupling constant alpha_S in the 5-quark theory at Q=MZ.
   5) The Sommerfeld fine structure constant alpha = 1/137.0...
   6) The non-perturbative light quark contribution to the
@@ -825,11 +829,11 @@ parameter values.
 fig_Mh_vs_Q (Source file: fig_Mh_vs_Q.c)
 ----------------------------------------
 
-Calculates the Higgs pole mass as a function of the MSbar
-renormalization scale Q at which it is computed, in various
-approximations, using the results in 1407.4336. The input parameters
-are obtained from the file "ReferenceModel.dat" unless a different
-file is specified using the "-i" option; see below.
+Calculates the Higgs pole mass as a function of the MSbar renormalization 
+scale Q at which it is computed, in various approximations, using the 
+results in 1407.4336 and 2203.05042. The input parameters are obtained from 
+the file "ReferenceModel.dat" unless a different file is specified using 
+the "-i" option; see below.
 
 This program produces by default an output file: "FIG_Mh_vs_Q.dat"
 with data in 7 columns, respectively
@@ -937,42 +941,46 @@ fig_MW_vs_Q (Source file: fig_MW_vs_Q.c)
 
 Calculates the physical mass of the W boson as a function of the MSbar
 renormalization scale Q at which it is computed, in various
-approximations, using the results in 1503.03782. The input parameters
-are obtained from the file "ReferenceModel.dat" unless a different
+approximations, using the results in 1503.03782 and 2203.05042. The input 
+parameters are obtained from the file "ReferenceModel.dat" unless a different
 file is specified using the "-i" option; see below.
 
 This program produces by default an output file "FIG_MW_vs_Q.dat",
 with data in 14 columns:
 
    1  Q  (MSbar renormalization scale)
-   2  MW_pole            (loopOrder = 0, tree-level)
-   3  MW_pole            (loopOrder = 1, 1-loop)
-   4  MW_BreitWigner     (loopOrder = 1, 1-loop)
-   5  GammaW_pole        (loopOrder = 1, 1-loop)
-   6  GammaW_BreitWigner (loopOrder = 1, 1-loop)
-   7  MW_pole            (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   8  MW_BreitWigner     (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   9  GammaW_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   10 GammaW_BreitWigner (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   11 MW_pole            (loopOrder = 2, full 2-loop)
-   12 MW_BreitWigner     (loopOrder = 2, full 2-loop)
-   13 GammaW_pole        (loopOrder = 2, full 2-loop)
-   14 GammaW_BreitWigner (loopOrder = 2, full 2-loop)
-   15 MW_pole            (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   16 MW_BreitWigner     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   17 GammaW_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   18 GammaW_BreitWigner (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   2  MW_pole        (loopOrder = 0, tree-level)
+   3  MW_pole        (loopOrder = 1, 1-loop)
+   4  MW_PDG         (loopOrder = 1, 1-loop)
+   5  GammaW_pole    (loopOrder = 1, 1-loop)
+   6  GammaW_PDG     (loopOrder = 1, 1-loop)
+   7  MW_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   8  MW_PDG         (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   9  GammaW_pole    (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   10 GammaW_PDG     (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   11 MW_pole        (loopOrder = 2, full 2-loop)
+   12 MW_PDG         (loopOrder = 2, full 2-loop)
+   13 GammaW_pole    (loopOrder = 2, full 2-loop)
+   14 GammaW_PDG     (loopOrder = 2, full 2-loop)
+   15 MW_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   16 MW_PDG         (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   17 GammaW_pole    (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   18 GammaW_PDG     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
 
 where the complex pole squared mass is:
 
-   s_pole = MW_pole^2 - i GammaW MW.
+   s_pole = (MW_pole - i GammaW_pole/2)^2.
 
-Note that the Breit-Wigner mass reported by experimentalists is
-related by
- 
-   MW_BreitWigner^2 = MW_pole^2 + GammaW^2
+Note that the PDG convention mass and width usually reported by 
+experimentalists for the X = W and Z masses are related to the pole mass
+and width by
 
-so that MW_BreitWigner is approximately 27 MeV larger than MW.
+   MX_PDG = MX_pole (1 + delta)/sqrt(1 - delta) 
+   GammaX_PDG = GammaX_pole (1 + delta)/(1 - delta)^(3/2) 
+
+where delta = (GammaX_pole^2)/(4 MX_pole^2), so that 
+MW_PDG is approximately 20.4 MeV larger than MW_pole, and
+MZ_PDG is approximately 25.6 MeV larger than MZ_pole.
 
 In the paper: arXiv:1907.02500
 Standard Model parameters in the tadpole-free pure MSbar scheme
@@ -1012,43 +1020,46 @@ fig_MZ_vs_Q (Source file: fig_MZ_vs_Q.c)
 
 Calculates the physical mass of the Z boson as a function of the MSbar
 renormalization scale Q at which it is computed, in various
-approximations, using the results in 1505.04833. The input parameters
-are obtained from the file "ReferenceModel.dat" unless a different
+approximations, using the results in 1505.04833 and 2203.05042. The input 
+parameters are obtained from the file "ReferenceModel.dat" unless a different
 file is specified using the "-i" option; see below.
 
 This program produces by default the output file "FIG_MZ_vs_Q.dat",
 with data in 14 columns:
 
-   1  Q                  (MSbar renormalization scale)
-   2  MZ_pole            (loopOrder = 0, tree-level)
-   3  MZ_pole            (loopOrder = 1, 1-loop)
-   4  MZ_BreitWigner     (loopOrder = 1, 1-loop)
-   5  GammaZ_pole        (loopOrder = 1, 1-loop)
-   6  GammaZ_BreitWigner (loopOrder = 1, 1-loop)
-   7  MZ_pole            (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   8  MZ_BreitWigner     (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   9  GammaZ_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   10 GammaZ_BreitWigner (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   11 MZ_pole            (loopOrder = 2, full 2-loop)
-   12 MZ_BreitWigner     (loopOrder = 2, full 2-loop)
-   13 GammaZ_pole        (loopOrder = 2, full 2-loop)
-   14 GammaZ_BreitWigner (loopOrder = 2, full 2-loop)
-   15 MZ_pole            (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   16 MZ_BreitWigner     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   17 GammaZ_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   18 GammaZ_BreitWigner (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   1  Q            (MSbar renormalization scale)
+   2  MZ_pole      (loopOrder = 0, tree-level)
+   3  MZ_pole      (loopOrder = 1, 1-loop)
+   4  MZ_PDG       (loopOrder = 1, 1-loop)
+   5  GammaZ_pole  (loopOrder = 1, 1-loop)
+   6  GammaZ_PDG   (loopOrder = 1, 1-loop)
+   7  MZ_pole      (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   8  MZ_PDG       (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   9  GammaZ_pole  (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   10 GammaZ_PDG   (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   11 MZ_pole      (loopOrder = 2, full 2-loop)
+   12 MZ_PDG       (loopOrder = 2, full 2-loop)
+   13 GammaZ_pole  (loopOrder = 2, full 2-loop)
+   14 GammaZ_PDG   (loopOrder = 2, full 2-loop)
+   15 MZ_pole      (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   16 MZ_PDG       (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   17 GammaZ_pole  (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   18 GammaZ_PDG   (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+
+where the complex pole squared mass for the Z boson is:
+
+   s_pole = (M_pole - i Gamma_pole/2)^2.
+
+Note that the PDG convention mass and width usually reported by 
+experimentalists for the X = W and Z masses are related to the pole mass
+and width by
+
+   MX_PDG = MX_pole (1 + delta)/sqrt(1 - delta) 
+   GammaX_PDG = GammaX_pole (1 + delta)/(1 - delta)^(3/2) 
+
+where delta = (GammaX_pole^2)/(4 MX_pole^2), so that 
+MZ_PDG is approximately 25.6 MeV larger than MZ_pole.
  
-where the complex pole squared mass is denoted:
-
-   s_pole = MZ_pole^2 - i GammaZ_pole MZ_pole.
-
-Note that the Breit-Wigner mass reported by experimentalists is
-related by
-
-   MZ_BreitWigner^2 = MZ_pole^2 + GammaZ_pole^2
-
-so that MZ_BreitWigner is approximately 34 MeV larger than MZ.
-
 In the paper: arXiv:1907.02500
 Standard Model parameters in the tadpole-free pure MSbar scheme
 by Stephen P. Martin and David G. Robertson,
@@ -2055,7 +2066,7 @@ void SMDR_Eval_Mh_pole (SMDR_REAL Q_eval,
 Computes the Higgs pole mass. The results M_h and Gamma_h for the
 complex pole squared mass
 
-   M_h^2 - i Gamma_h M_h 
+   (M_h - i Gamma_h/2)^2 
 
 are returned as Mhpoleresult and Gammahpoleresult.
 
@@ -2111,10 +2122,10 @@ void SMDR_Eval_MW_pole (SMDR_REAL Q_eval,
                         float loopOrder,
                         SMDR_REAL *MWpoleresult,
                         SMDR_REAL *GammaWpoleresult,
-                        SMDR_REAL *MWBreitWignerresult,
-                        SMDR_REAL *GammaWBreitWignerresult);
+                        SMDR_REAL *MWPDGresult,
+                        SMDR_REAL *GammaWPDGresult);
 
-Computes the complex pole and Breit-Wigner squared masses of the W
+Computes the complex pole and PDG convention masses and widths of the W
 boson, using the calculation from 1503.03782.
 
 If the argument Q_eval is positive, then the inputs are obtained by
@@ -2131,22 +2142,22 @@ by the current values of the MSbar parameter global variables:
 
 The results for the complex pole squared mass 
 
-   M_W^2 - i Gamma_W M_W
+   (MW - i GammaW/2)^2
 
 are returned in MWpoleresult, GammaWpoleresult.
 
-The results for the complex Breit-Wigner squared mass are also
-returned as MWBreitWignerresult, GammaWBreitWignerresult.
+The results for the PDG convention mass and width are also returned as 
+MWPDGresult, GammaWPDGresult.
 
 ---------------------------------------------------------------------
 void SMDR_Eval_MZ_pole (SMDR_REAL Q_eval,
                         float loopOrder,
                         SMDR_REAL *MZpoleresult,
                         SMDR_REAL *GammaZpoleresult,
-                        SMDR_REAL *MZBreitWignerresult,
-                        SMDR_REAL *GammaZBreitWignerresult);
+                        SMDR_REAL *MZPDGresult,
+                        SMDR_REAL *GammaZPDGresult);
 
-Computes the complex pole and Breit-Wigner squared masses of the Z
+Computes the complex pole and PDG convention masses and widths of the Z
 boson, using the calculation from 1505.04833.
 
 If the argument Q_eval is positive, then the inputs are obtained by
@@ -2163,12 +2174,12 @@ by the current values of the MSbar parameter global variables:
 
 The results for the complex pole squared mass
 
-   M_Z^2 - i Gamma_Z M_Z
+   (MZ - i GammaZ/2)^2
 
 are returned as MZpoleresult, GammaZpoleresult.
 
-The results for the complex Breit-Wigner squared mass are also
-returned as MZBreitWignerresult, GammaZBreitWignerresult.
+The results for the PDG convention mass and width are also returned as 
+MZPDGresult, GammaZPDGresult.
 
 
 ---------------------------------------------------------------------
@@ -2476,7 +2487,7 @@ The inputs are the arguments:
    alphaS_target (in the 5-quark, 3-charged-lepton QCD+QED theory at
                   Q=MZ),
    alpha_target (in the 5-quark, 3-charged-lepton theory at Q=MZ),
-   MZ_target (the Z-boson Breit-Wigner mass),
+   MZ_target (the Z-boson PDG convention mass),
    GFermi_target (the Fermi constant),
    Mh_target (the Higgs boson pole mass),
    Mt_target (the top-quark pole mass),
@@ -2584,8 +2595,8 @@ boson, and W bozon, and stores the results in the global variables:
 
    Mt_pole, Gammat_pole
    Mh_pole, Gammah_pole
-   MZ_pole, GammaZ_pole, MZ_BreitWigner, GammaZ_BreitWigner
-   MW_pole, GammaW_pole, MW_BreitWigner, GammaW_BreitWigner
+   MZ_pole, GammaZ_pole, MZ_PDG, GammaZ_PDG
+   MW_pole, GammaW_pole, MW_PDG, GammaW_PDG
 
 Works by calling the functions SMDR_Eval_Mt_pole(),
 SMDR_Eval_Mh_pole(), SMDR_Eval_MZ_pole(), and SMDR_Eval_MW_pole(). In
@@ -2791,7 +2802,7 @@ Reads the values of the following on-shell observables from a file:
     SMDR_Delta_alpha_had_5_MZ_in
     SMDR_Mt_pole
     SMDR_Mh_pole
-    SMDR_MZ_BreitWigner
+    SMDR_MZ_PDG
     SMDR_GFermi
     SMDR_alpha
     SMDR_alphaS_5_MZ
@@ -3089,9 +3100,9 @@ int main (int argc, char *argv[])
   /* Evaluate Higgs boson pole mass. */
   SMDR_Eval_Mh_pole (160., 2.5, &SMDR_Mh_pole, &SMDR_Gammah_pole);
 
-  /* Evaluate Z boson pole and Breit-Wigner masses */
+  /* Evaluate Z boson pole and PDG convention masses and widths*/
   SMDR_Eval_MZ_pole (160., 2.5, &SMDR_MZ_pole, &SMDR_GammaZ_pole,
-                     &SMDR_MZ_BreitWigner, &SMDR_GammaZ_BreitWigner);
+                     &SMDR_MZ_PDG, &SMDR_GammaZ_PDG);
 
   /* Evaluate GFermi */
   SMDR_GFermi = SMDR_Eval_GFermi (SMDR_Mt_EXPT, 2);
@@ -3100,10 +3111,9 @@ int main (int argc, char *argv[])
      non-decoupled theory, Sommerfeld fine structure constant alpha,
      alpha(MZ) and sin^2(thetaW) in PDG MSbar scheme with only top
      decoupled.  */
-  SMDR_Eval_Gauge (SMDR_Mt_pole, SMDR_Mh_pole, SMDR_MW_BreitWigner);
+  SMDR_Eval_Gauge (SMDR_Mt_pole, SMDR_Mh_pole, SMDR_MW_PDG);
 
-  /* Evaluate MSbar parameters in 5-quark, 3-lepton QCDQED theory at
-  MZ */
+  /* Evaluate MSbar parameters in 5-quark, 3-lepton QCDQED theory at MZ */
   SMDR_Eval_QCDQED_at_MZ (SMDR_MZ_EXPT, SMDR_MZ_EXPT, 5);
 
   printf("\nOUTPUT QUANTITIES:\n");

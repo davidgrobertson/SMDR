@@ -9,6 +9,10 @@
 
     4-loop pure QCD from 1502.01030, updated and perfected in 1606.06754.
     2-loop non-pure-QCD from 1604.01134.
+
+    As of version 1.2, the top-quark pole mass Mt and width Gammat are
+    defined in terms of the complex pole mass as
+    s_pole = (Mt - i Gammat/2)^2.
 */
 #include "smdr_internal.h"
 
@@ -173,6 +177,7 @@ SMDR_REAL SMDR_Eval_yt (SMDR_REAL Q_eval,
   SMDR_REAL ytsave = yt;
   SMDR_COMPLEX CM2T;
   SMDR_REAL targetratio;
+  SMDR_REAL GammaTresult, MTresult;
   int i;
   char funcname[] = "SMDR_Eval_yt";
 
@@ -214,9 +219,13 @@ SMDR_REAL SMDR_Eval_yt (SMDR_REAL Q_eval,
   /* Initial guess. */
   yt = 0.93;
   SMDR_Update ();
-  Tpole = MTpoletarget * MTpoletarget;
+
+  /* First guess, will be updated in iteration. */
+  GammaTresult = 1.36;
 
   if (1 == method) {
+    /* This is the real part of spole. */
+    Tpole = MTpoletarget * MTpoletarget - GammaTresult * GammaTresult/4.0;
     T = Tpole;
     T2 = T*T; T3 = T2*T; T4 = T3*T;
     fiveTm2W2 = (5*T - 2*W) * (5*T - 2*W); 
@@ -233,7 +242,9 @@ SMDR_REAL SMDR_Eval_yt (SMDR_REAL Q_eval,
       if (otherLoopOrder > 0.1) CM2T += ONELOOPFACTOR*SMDR_Mt_T1loopnonQCD();
       if (otherLoopOrder > 1.1) CM2T += TWOLOOPFACTOR*SMDR_Mt_T2loopmixed();
       if (otherLoopOrder > 1.9) CM2T += TWOLOOPFACTOR*SMDR_Mt_T2loopnonQCD();
-      targetratio = MTpoletarget/SMDR_SQRT(SMDR_CREAL(CM2T));
+      MTresult = SMDR_CREAL(SMDR_CSQRT(CM2T));
+      GammaTresult = -2.0 * SMDR_CIMAG(SMDR_CSQRT(CM2T));
+      targetratio = MTpoletarget/MTresult;
       yt = yt * targetratio;
       yt2 = yt*yt;
       /*
@@ -365,8 +376,8 @@ void SMDR_Eval_Mt_pole (SMDR_REAL Q_eval,
     }
   }
 
-  *Mtpoleresult = SMDR_SQRT(SMDR_CREAL(CM2T));
-  *Gammatpoleresult = -SMDR_CIMAG(CM2T)/(*Mtpoleresult);
+  *Mtpoleresult = SMDR_CREAL(SMDR_CSQRT(CM2T));
+  *Gammatpoleresult = -2.0 * SMDR_CIMAG(SMDR_CSQRT(CM2T));
 
   return;
 }

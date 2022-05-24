@@ -1,42 +1,46 @@
 /* 
    Calculates the physical mass of the Z boson as a function of the
    MSbar renormalization scale Q at which it is computed, in various
-   approximations, using the results in 1505.04833. The input
+   approximations, using the results in 1505.04833 and 2203.05042. The input
    parameters are obtained from the file "ReferenceModel.dat" unless a
    different file is specified using the "-i" option; see below. 
 
    This program produces by default the output file "FIG_MZ_vs_Q.dat",
    with data in 18 columns:
 
-   1  Q                  (MSbar renormalization scale)
-   2  MZ_pole            (loopOrder = 0, tree-level)
-   3  MZ_pole            (loopOrder = 1, 1-loop)
-   4  MZ_BreitWigner     (loopOrder = 1, 1-loop)
-   5  GammaZ_pole        (loopOrder = 1, 1-loop)
-   6  GammaZ_BreitWigner (loopOrder = 1, 1-loop)
-   7  MZ_pole            (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   8  MZ_BreitWigner     (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   9  GammaZ_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   10 GammaZ_BreitWigner (loopOrder = 1.5, 1-loop plus 2-loop QCD)
-   11 MZ_pole            (loopOrder = 2, full 2-loop)
-   12 MZ_BreitWigner     (loopOrder = 2, full 2-loop)
-   13 GammaZ_pole        (loopOrder = 2, full 2-loop)
-   14 GammaZ_BreitWigner (loopOrder = 2, full 2-loop)
-   15 MZ_pole            (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   16 MZ_BreitWigner     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   17 GammaZ_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
-   18 GammaZ_BreitWigner (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   1  Q              (MSbar renormalization scale)
+   2  MZ_pole        (loopOrder = 0, tree-level)
+   3  MZ_pole        (loopOrder = 1, 1-loop)
+   4  MZ_PDG         (loopOrder = 1, 1-loop)
+   5  GammaZ_pole    (loopOrder = 1, 1-loop)
+   6  GammaZ_PDG     (loopOrder = 1, 1-loop)
+   7  MZ_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   8  MZ_PDG         (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   9  GammaZ_pole    (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   10 GammaZ_PDG     (loopOrder = 1.5, 1-loop plus 2-loop QCD)
+   11 MZ_pole        (loopOrder = 2, full 2-loop)
+   12 MZ_PDG         (loopOrder = 2, full 2-loop)
+   13 GammaZ_pole    (loopOrder = 2, full 2-loop)
+   14 GammaZ_PDG     (loopOrder = 2, full 2-loop)
+   15 MZ_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   16 MZ_PDG         (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   17 GammaZ_pole    (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
+   18 GammaZ_PDG     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)
  
-   where the complex pole squared mass is denoted:
+   where, as of version 1.2, the complex pole squared mass is denoted:
 
-   s_pole = MZ_pole^2 - i GammaZ_pole MZ_pole.
+   s_pole = (MZ_pole - i GammaZ_pole/2)^2.
 
-   Note that the Breit-Wigner mass reported by experimentalists is
-   related by
+   Note that the PDG convention mass and width usually reported by
+   experimentalists for the X = W and Z masses are related to the pole mass
+   and width by
 
-   MZ_BreitWigner^2 = MZ_pole^2 + GammaZ_pole^2
+   MX_PDG = MX_pole (1 + delta)/sqrt(1 - delta)
+   GammaX_PDG = GammaX_pole (1 + delta)/(1 - delta)^(3/2)
 
-   so that MZ_BreitWigner is approximately 34 MeV larger than MZ.
+   where delta = (GammaX_pole^2)/(4 MX_pole^2), so that
+   MW_PDG is approximately 20.4 MeV larger than MW_pole, and
+   MZ_PDG is approximately 25.6 MeV larger than MZ_pole.
 
    In the paper: arXiv:1907.02500
    Standard Model parameters in the tadpole-free pure MSbar scheme
@@ -93,24 +97,24 @@ int main (int argc, char *argv[])
   void *argvar[] = {inFileName, outFileName};
 
   char *columnDescriptor[] = {
-    "1  Q                  (MSbar renormalization scale)",
-    "2  MZ_pole            (loopOrder = 0, tree-level)",
-    "3  MZ_pole            (loopOrder = 1, 1-loop)",
-    "4  MZ_BreitWigner     (loopOrder = 1, 1-loop)",
-    "5  GammaZ_pole        (loopOrder = 1, 1-loop)",
-    "6  GammaZ_BreitWigner (loopOrder = 1, 1-loop)",
-    "7  MZ_pole            (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
-    "8  MZ_BreitWigner     (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
-    "9  GammaZ_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
-    "10 GammaZ_BreitWigner (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
-    "11 MZ_pole            (loopOrder = 2, full 2-loop)",
-    "12 MZ_BreitWigner     (loopOrder = 2, full 2-loop)",
-    "13 GammaZ_pole        (loopOrder = 2, full 2-loop)",
-    "14 GammaZ_BreitWigner (loopOrder = 2, full 2-loop)",
-    "15 MZ_pole            (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
-    "16 MZ_BreitWigner     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
-    "17 GammaZ_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
-    "18 GammaZ_BreitWigner (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
+    "1  Q              (MSbar renormalization scale)",
+    "2  MZ_pole        (loopOrder = 0, tree-level)",
+    "3  MZ_pole        (loopOrder = 1, 1-loop)",
+    "4  MZ_PDG         (loopOrder = 1, 1-loop)",
+    "5  GammaZ_pole    (loopOrder = 1, 1-loop)",
+    "6  GammaZ_PDG     (loopOrder = 1, 1-loop)",
+    "7  MZ_pole        (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
+    "8  MZ_PDG         (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
+    "9  GammaZ_pole    (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
+    "10 GammaZ_PDG     (loopOrder = 1.5, 1-loop plus 2-loop QCD)",
+    "11 MZ_pole        (loopOrder = 2, full 2-loop)",
+    "12 MZ_PDG         (loopOrder = 2, full 2-loop)",
+    "13 GammaZ_pole    (loopOrder = 2, full 2-loop)",
+    "14 GammaZ_PDG     (loopOrder = 2, full 2-loop)",
+    "15 MZ_pole        (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
+    "16 MZ_PDG         (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
+    "17 GammaZ_pole    (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
+    "18 GammaZ_PDG     (loopOrder = 2.5, full 2-loop plus 3-loop QCD)",
     "",
     "In the paper: arXiv:1907.02500",
     "Standard Model parameters in the tadpole-free pure MSbar scheme",
@@ -162,36 +166,36 @@ int main (int argc, char *argv[])
     fprintf (outfile, "%.1Lf", Q);  
 
     SMDR_Eval_MZ_pole (-1, 0, &SMDR_MZ_pole, &SMDR_GammaZ_pole,
-                              &SMDR_MZ_BreitWigner, &SMDR_GammaZ_BreitWigner);
+                              &SMDR_MZ_PDG, &SMDR_GammaZ_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_MZ_pole);
 
     SMDR_Eval_MZ_pole (-1, 1, &SMDR_MZ_pole, &SMDR_GammaZ_pole,
-                              &SMDR_MZ_BreitWigner, &SMDR_GammaZ_BreitWigner);
+                              &SMDR_MZ_PDG, &SMDR_GammaZ_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_MZ_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_MZ_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_MZ_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_GammaZ_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_GammaZ_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_GammaZ_PDG);
 
     SMDR_Eval_MZ_pole (-1, 1.5, &SMDR_MZ_pole, &SMDR_GammaZ_pole,
-                                &SMDR_MZ_BreitWigner, &SMDR_GammaZ_BreitWigner);
+                                &SMDR_MZ_PDG, &SMDR_GammaZ_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_MZ_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_MZ_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_MZ_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_GammaZ_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_GammaZ_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_GammaZ_PDG);
 
     SMDR_Eval_MZ_pole (-1, 2, &SMDR_MZ_pole, &SMDR_GammaZ_pole,
-                              &SMDR_MZ_BreitWigner, &SMDR_GammaZ_BreitWigner);
+                              &SMDR_MZ_PDG, &SMDR_GammaZ_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_MZ_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_MZ_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_MZ_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_GammaZ_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_GammaZ_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_GammaZ_PDG);
 
     SMDR_Eval_MZ_pole (-1, 2.5, &SMDR_MZ_pole, &SMDR_GammaZ_pole,
-                                &SMDR_MZ_BreitWigner, &SMDR_GammaZ_BreitWigner);
+                                &SMDR_MZ_PDG, &SMDR_GammaZ_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_MZ_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_MZ_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_MZ_PDG);
     fprintf (outfile, "  %.8Lf", SMDR_GammaZ_pole);
-    fprintf (outfile, "  %.8Lf", SMDR_GammaZ_BreitWigner);
+    fprintf (outfile, "  %.8Lf", SMDR_GammaZ_PDG);
     
     fprintf (outfile, "\n");
     fflush (outfile);

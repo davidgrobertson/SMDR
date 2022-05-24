@@ -1,3 +1,34 @@
+May 22, 2022 Version 1.2
+---------------------------
+
+* From this version on, the convention for reporting W and Z masses that 
+  was previously known as "variable width Breit-Wigner" or just "Breit-Wigner"
+  is now referred to as "PDG convention" or just "PDG". Variable names with 
+  "BreitWigner" have been changed accordingly to include "PDG" in the names. 
+  This includes:
+    SMDR_MZ_BreitWigner -> SMDR_MZ_PDG
+    SMDR_MW_BreitWigner -> SMDR_MW_PDG.
+
+* From this version on, the pole mass parameters M and Gamma for the 
+  Z, W, top, and Higgs are defined by 
+    s_pole = (M - I Gamma/2)^2, 
+  where s_pole is the complex pole squared mass. In previous versions they 
+  were defined by the convention s_pole = M^2 - I Gamma M. For a nice 
+  discussion of the reasons for the change, see Scott Willenbrock's paper 
+  https://arxiv.org/abs/2203.11056
+  This involves changes in src/MZ.c, src/MW.c, src/Mh.c, and src/Mt.c.
+  Note that the results for the experimental masses as given in the 
+  PDG (variable-width Breit-Wigner) convention are not affect by this change.
+
+* Fixed a bug in src/MZ.c in the function SMDR_Eval_MZ_pole, so that
+  now *MZPDGresult is correctly set as the result of the calculation,
+  instead of SMDR_MZ_PDG. This bug had no effect on applications in
+  previous versions, where *MZPDGresult and SMDR_MZ_PDG were
+  always the same thing.
+
+* The numbers of digits in the prompts for calc_fit in interactive mode
+  have been increased.
+
 March 10, 2022 Version 1.1
 ---------------------------
 
