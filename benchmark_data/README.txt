@@ -5,7 +5,7 @@ will over-write the one in the main directory after:
   make clean
   make
 
-To make this ReferenceModel.dat, the procedure we followed is:
+To make this ReferenceModel.dat, the procedure followed is:
 
   ./calc_fit -int -o NEW_ReferenceModel.dat -e 1.0e-13
 
