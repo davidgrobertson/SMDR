@@ -1,4 +1,6 @@
-Deltartilde2EW = 
+Deltartilde2EW = 0.0;
+
+Deltartilde2EW += 
      5.125*h2 - 6.*h*T - 199.25*T2 + (72.*T3)/h + (48.*T3)/W - 5.*h*W - 
      352.*T*W + 169.04166666666666*W2 + Ihhh*(-1.5*h - 9.*W - (9.*W2)/hmW) + 
      Ah*At*(-9. - (36.*T)/h - (54.*T)/(-1.*h + W) + (30.*W)/(-1.*h + W) + 
@@ -6,6 +8,11 @@ Deltartilde2EW =
        (-36.*T2 - 6.*T*W + 6.*W2)/hmW + (72.*T2*W - 18.*T*W2)/hmW2) - 
      (4.*W3)/h - (84.*W3)/hm4W - (8.*W3)/T + 
      IhhW*(22.*W + (8.*W2)/hmW + (3.*W3)/hmW2) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      I0ht*(9.*h - 27.*T - 6.*W + (18.*T2 - 6.*T*W + 6.*W2)/hmW + 
        (-6.*T2*W - 6.*T*W2 + 12.*W3)/hmW2) + (0.84375*W4)/(hm4Z*hmW) + 
      (-12.*T2*W - 13.5*T*W2 - 147.375*W3)/WmZ + (72.*W4)/(hm4W*WmZ) - 
@@ -16,11 +23,21 @@ Deltartilde2EW =
        (0.5*W2)/hmW - (37.5*W3)/hmW2 + (-2.*h2 + 10.*h*W - 9.*W2)/WmZ + 
        (12.*W3)/(hm4W*WmZ) - (33.*W3)/(hmW*WmZ) + 
        (0.5*h3 - 2.*h2*W + 6.*h*W2)/WmZ2) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      IttW*(-54.666666666666664*T + 6.666666666666667*W + 
        (24.*T*W - 6.*W2)/hmW - (16.*W2)/T + (-72.*T2*W + 18.*T*W2)/hmW2 + 
        (-32.*T*W + 14.*W2 - (12.*W3)/T)/WmZ + (6.*T*W2 - 6.*W3)/WmZ2) + 
      IWWW*(-6.*W + (12.*W2)/hmW + (34.5*W3)/hmW2 + (132.*W2)/WmZ + 
        (33.*W3)/(hmW*WmZ) + (148.5*W3)/WmZ2) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      I0tW*(-16.*T + (48.*T2)/W - 16.*W + (-18.*T2 - 18.*W2)/hmW + 
        (20.*W2)/T + (6.*T2*W + 6.*T*W2 - 12.*W3)/hmW2 + 
        (18.*T2 - 54.*W2)/WmZ + (-6.*T2*W - 6.*T*W2 + 12.*W3)/WmZ2) + 
@@ -35,6 +52,11 @@ Deltartilde2EW =
         hmW2 + (8.*W2)/Z2) + (24.*T3*W)/Z2 - (4.*h2*W2)/Z2 - 
      (157.33333333333334*T2*W2)/Z2 + (8.*h*W3)/Z2 + (181.*W4)/Z2 + 26.75*Z2 - 
      (32.*W*Z2)/h - (12.*W*Z2)/T + (5.333333333333333*W2*Z2)/T2 + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      I0hZ*(3.*h - (2.*h2)/W + 64.*W + (32.*W2)/h + (12.*h*W - 12.*W2)/WmZ - 
        (16.*h*W)/Z - (28.*W2)/Z - 21.*Z + (4.*h*Z)/W - (32.*W*Z)/h + 
        (-4.*W2 - (12.*W3)/Z + 32.*W*Z - 16.*Z2)/hmW + (4.*h2*W)/Z2 - 
@@ -45,6 +67,11 @@ Deltartilde2EW =
        (12.5625*W2 + 14.25*W*Z - 12.*Z2)/hm4Z - (4.*h2*W)/Z2 + (8.*h*W2)/Z2 - 
        (9.*Z2)/h + (-61.0625*W2 + (4.*W3)/Z + 2.75*W*Z + 9.*Z2)/hmW + 
        (-1.5*W3 + 6.*W2*Z - 18.*W*Z2)/hmW2) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW += 
      IWWZ*(145.*W - (297.*W3)/WmZ2 - (284.*W2)/Z + 43.*Z + (144.*W3)/Z2 - 
        (24.*Z2)/W + (-72.*W2 + (116.*W3)/Z + 19.*W*Z + 3.*Z2)/hmW + 
        (68.*W3 + (48.*W4)/Z - 16.*W2*Z - 1.*W*Z2)/hmW2) + 
@@ -64,6 +91,11 @@ Deltartilde2EW =
        (6.*h)/Z - (184.*W)/Z - (26.*Z)/W + (-5.*W2 + (24.*W3)/Z - 1.*W*Z)/
         hmW2 + (-7.*W + (36.*W2)/Z + 19.*Z - (12.*W3)/Z2)/hmW + (4.*h*W)/Z2 + 
        (66.*W2)/Z2 - (4.*h*W2)/Z3 + (16.*W3)/Z3) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      I0hW*(-12.*h + (8.*h2)/W + 40.*W + (32.*W2)/h + (-12.*h*W + 12.*W2)/
         WmZ + (-120.*W2 + (120.*W3)/Z)/hmW + (-72.*W3 + (72.*W4)/Z)/hmW2 - 
        (6.*h2)/Z - (32.*h*W)/Z - (18.*W2)/Z + (4.*h2*W)/Z2 - (4.*h*W2)/Z2 - 
@@ -78,6 +110,11 @@ Deltartilde2EW =
      (4.*Z3)/W + (1.3333333333333333*W*Z3)/T2 + 
      (-72.*T3 - 6.*T2*W - 12.*T*W2 - 196.51041666666666*W3 + (288.*W4)/Z + 
        20.625*W2*Z - 12.5*W*Z2 + 18.*Z3)/hmW + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      I0tZ*(45.*T + 76.66666666666667*W - (13.333333333333334*W2)/T + 
        (-18.*T2 - 6.*T*W + 42.*W2)/WmZ + (6.*T2*W + 6.*T*W2 - 12.*W3)/WmZ2 - 
        (36.*T2)/Z - (88.*T*W)/Z - (29.333333333333332*W2)/Z - 
@@ -85,6 +122,11 @@ Deltartilde2EW =
        (10.666666666666666*W2*Z)/T2 + (24.*T2*W)/Z2 + (56.*T*W2)/Z2 + 
        (8.666666666666666*Z2)/T + (2.6666666666666665*W*Z2)/T2 - 
        (24.*T2*W2)/Z3 - (1.3333333333333333*Z3)/T2) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      AZ*AZ*(0.6666666666666666 - (16.*W)/h - (6.*W)/T - (2.25*W2)/(hm4Z*hmW) + 
        (2.6666666666666665*W2)/T2 + (12.*W2)/(hm4Z*WmZ) + 
        (-3.*h + 29.*W + (6.*W2)/T)/WmZ + (-0.5*h2 + h*W + 82.5*W2)/WmZ2 - 
@@ -100,12 +142,22 @@ Deltartilde2EW =
        (2.*W4)/Z4) + I0WZ*(-218.*W - (72.*W2)/WmZ + (318.*W2)/Z - 44.*Z - 
        (192.*W3)/Z2 + (20.*Z2)/W + (4.*W2 + (12.*W3)/Z - 32.*W*Z + 16.*Z2)/
         hmW + (52.*W4)/Z3 - (8.*W5)/Z4) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      AW*(6.*h - 78.66666666666667*T + 264.*W + (4.*W2)/h + (28.*W2)/hm4W - 
        (4.*W2)/T - (24.*W3)/(hm4W*WmZ) + (-32.*T*W + 66.66666666666667*W2 + 
          (12.*W3)/T)/WmZ - (6.*W3)/WmZ2 + (188.*W2)/Z + 14.*Z + 
        (-12.*T*W + 290.6666666666667*W2 - (250.*W3)/Z + 2.*W*Z)/hmW - 
        (185.*W3)/Z2 + (-12.*T*W2 + 115.33333333333333*W3 - (120.*W4)/Z + 
          2.*W2*Z - 12.*W*Z2)/hmW2 - (28.*W4)/Z3 + (4.*W5)/Z4) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      IWZZ*(-58.*W - (132.*W2)/WmZ - (33.*W3)/(hmW*WmZ) + (148.5*W3)/WmZ2 - 
        (166.*W2)/Z + 16.*Z + (62.*W2 - (4.*W3)/Z - 8.*W*Z)/hmW + 
        (77.*W3)/Z2 + (1.5*W3 - 6.*W2*Z + 18.*W*Z2)/hmW2 - (24.*W4)/Z3 + 
@@ -119,12 +171,22 @@ Deltartilde2EW =
        (5.333333333333333*W2*Z2)/T2 - (24.*T3*W2)/Z3 + (28.*W5)/Z3 + 
        (16.*Z3)/h - (2.*Z3)/T - (4.*Z3)/W + (1.3333333333333333*W*Z3)/T2 - 
        (4.*W6)/Z4 - (0.6666666666666666*Z4)/T2)*Zeta2 + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      At*At*(-61. + (36.*T)/h - (36.*T)/hmW + (24.*T)/W - 
        (94.66666666666667*W)/T + (5.333333333333333*W2)/T2 - (3.*W)/WmZ - 
        (18.*T)/Z + (170.66666666666666*W)/Z + (85.33333333333333*W2)/(T*Z) + 
        (9.333333333333334*Z)/T + (1.3333333333333333*W*Z)/T2 + (12.*T*W)/Z2 - 
        (66.66666666666667*W2)/Z2 - (0.6666666666666666*Z2)/T2 - 
        (12.*T*W2)/Z3 - (1.*eightWm5Z2)/(WmZ*Zm4t)) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      At*AZ*(-19.333333333333332 + (18.666666666666668*W)/T + 
        (-18.*T + 5.*W + (24.*W2)/T)/WmZ + (6.*T*W)/WmZ2 - (36.*T)/Z + 
        (138.66666666666666*W)/Z - (13.333333333333334*W2)/(T*Z) - 
@@ -135,6 +197,11 @@ Deltartilde2EW =
        (389.3333333333333*T*W)/Z + (25.333333333333332*W2)/Z - 
        7.833333333333333*Z - (24.*T2*W)/Z2 + (181.33333333333334*T*W2)/Z2 + 
        (24.*T2*W2)/Z3 - (0.5*eightWm5Z2*Z)/(WmZ*Zm4t)) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      AZ*(-28.333333333333332*T + 271.0833333333333*W - (32.*W2)/h + 
        (20.*W2)/T - (1.125*W3)/(hm4Z*hmW) + (24.*W3)/(hm4Z*WmZ) + 
        (41.*T*W + 85.58333333333333*W2 - (12.*W3)/T)/WmZ + (6.*W3)/WmZ2 + 
@@ -145,6 +212,11 @@ Deltartilde2EW =
        (128.*W3)/Z2 + (2.*Z2)/h + (2.*Z2)/T + (4.*Z2)/W - 
        (1.3333333333333333*W*Z2)/T2 + (-25.125*W2 - 28.5*W*Z + 24.*Z2)/hm4Z + 
        (0.6666666666666666*Z3)/T2 - (0.25*eightWm5Z2*Z)/(WmZ*Zm4t)) + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Deltartilde2EW +=
      IttZ*(-46.333333333333336*T - 94.41666666666667*W - 
        (6.666666666666667*W2)/T + (29.*T*W - 10.25*W2 + (12.*W3)/T)/WmZ + 
        (-6.*T*W2 + 6.*W3)/WmZ2 + (226.66666666666666*T*W)/Z + 

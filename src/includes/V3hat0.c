@@ -1409,7 +1409,9 @@ coZeta3 = v4*((-5791*g10)/(216*g2pgp2) + (97*g12)/(36*g2pgp22) +
       48*k*yt6 - (489*yt8)/8)
 ;
 
-V3hat0 = 
+V3hat0 =  0.;
+
+V3hat0 += 
     co1 + 
     coZeta2*Zeta2 + 
     coZeta3*Zeta3 + 
@@ -1429,6 +1431,11 @@ V3hat0 =
     coAhAW*Ah*AW + 
     coAhAhAW*Ah*Ah*AW + 
     coATAW*AT*AW + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+V3hat0 += 
     coAhATAW*Ah*AT*AW + 
     coATATAW*AT*AT*AW + 
     coAWAW*AW*AW + 
@@ -1449,6 +1456,11 @@ V3hat0 =
     coAZAZ*AZ*AZ + 
     coAhAZAZ*Ah*AZ*AZ + 
     coATAZAZ*AT*AZ*AZ + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+V3hat0 += 
     coAWAZAZ*AW*AZ*AZ + 
     coAZAZAZ*AZ*AZ*AZ + 
     coFh00W*Fh00W + 
@@ -1474,6 +1486,11 @@ V3hat0 =
     coFWhWZ*FWhWZ + 
     coFZ0TT*FZ0TT + coFZ0TW*FZ0TW + 
     coFZ0WW*FZ0WW + coFZhTT*FZhTT + coFZhWW*FZhWW + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+V3hat0 += 
     coFBAR00TW*FBAR00TW + coFBAR0hTT*FBAR0hTT + 
     coFBAR0hWW*FBAR0hWW + coFBAR0TTZ*FBAR0TTZ + 
     coFBAR0WWZ*FBAR0WWZ + coG0TTWW*G0TTWW + 
@@ -1495,6 +1512,11 @@ V3hat0 =
     coH00WZTT*H00WZTT + coH00ZZ00*H00ZZ00 + 
     coH0TTT0T*H0TTT0T + coH0TTThT*H0TTThT + 
     coH0TTTZT*H0TTTZT + coH0TTW0W*H0TTW0W + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+V3hat0 += 
     coH0TTWhW*H0TTWhW + coH0TTWZW*H0TTWZW + 
     coH0WWW0W*H0WWW0W + coH0WWWhW*H0WWWhW + 
     coH0WWWZW*H0WWWZW + coHhhhhhh*Hhhhhhh + 
@@ -1505,6 +1527,11 @@ V3hat0 =
     coHhWZWWZ*HhWZWWZ + coHhZZZhZ*HhZZZhZ + 
     coHTTZZTT*HTTZZTT + coHWWZZWW*HWWZZWW + 
     coI0hW*I0hW + coAhI0hW*Ah*I0hW + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+V3hat0 += 
     coATI0hW*AT*I0hW + coAWI0hW*AW*I0hW + 
     coAZI0hW*AZ*I0hW + coI0hZ*I0hZ + 
     coAhI0hZ*Ah*I0hZ + coATI0hZ*AT*I0hZ + 
@@ -1515,6 +1542,11 @@ V3hat0 =
     coAhI0WZ*Ah*I0WZ + coATI0WZ*AT*I0WZ + 
     coAWI0WZ*AW*I0WZ + coAZI0WZ*AZ*I0WZ + 
     coIhhh*Ihhh + coAhIhhh*Ah*Ihhh + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+V3hat0 += 
     coATIhhh*AT*Ihhh + coAWIhhh*AW*Ihhh + 
     coAZIhhh*AZ*Ihhh + coIhTT*IhTT + 
     coAhIhTT*Ah*IhTT + coATIhTT*AT*IhTT + 
@@ -1522,6 +1554,11 @@ V3hat0 =
     coIhWW*IhWW + coAhIhWW*Ah*IhWW + 
     coATIhWW*AT*IhWW + coAWIhWW*AW*IhWW + 
     coAZIhWW*AZ*IhWW + coIhZZ*IhZZ + 
+0;
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+V3hat0 += 
     coAhIhZZ*Ah*IhZZ + coATIhZZ*AT*IhZZ + 
     coAWIhZZ*AW*IhZZ + coAZIhZZ*AZ*IhZZ + 
     coITTZ*ITTZ + coAhITTZ*Ah*ITTZ + 
@@ -1529,4 +1566,3 @@ V3hat0 =
     coAZITTZ*AZ*ITTZ + coIWWZ*IWWZ + 
     coAhIWWZ*Ah*IWWZ + coATIWWZ*AT*IWWZ + 
     coAWIWWZ*AW*IWWZ + coAZIWWZ*AZ*IWWZ;
-

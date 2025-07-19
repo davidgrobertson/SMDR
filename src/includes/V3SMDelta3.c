@@ -7368,7 +7368,10 @@ codZeta3 = v2*(g10/(48*g2m4k) + g12/(64*g2m8k2) -
         96*k*yt4 + (8*yt6)/3) - (1017*yt8)/4)
 ;
  
-Delta3 = TVIL_CREAL(
+
+Delta3 = 0.0;
+
+Delta3 += TVIL_CREAL(
     cod1 + 
     codZeta2*Zeta2 + 
     codZeta3*Zeta3 + 
@@ -7390,6 +7393,11 @@ Delta3 = TVIL_CREAL(
     codATAW*AT*AW + 
     codAhATAW*Ah*AT*AW + 
     codATATAW*AT*AT*AW + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codAWAW*AW*AW + 
     codAhAWAW*Ah*AW*AW + 
     codATAWAW*AT*AW*AW + 
@@ -7411,6 +7419,11 @@ Delta3 = TVIL_CREAL(
     codAWAZAZ*AW*AZ*AZ + 
     codAZAZAZ*AZ*AZ*AZ + 
     codFh00T*Fh00T + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codFh00W*Fh00W + 
     codFh00Z*Fh00Z + 
     codFh0hW*Fh0hW + 
@@ -7431,6 +7444,11 @@ Delta3 = TVIL_CREAL(
     codFT0TW*FT0TW + 
     codFT0WZ*FT0WZ + 
     codFThTZ*FThTZ + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codFTTWW*FTTWW + 
     codFTTZZ*FTTZZ + 
     codFW00Z*FW00Z + 
@@ -7451,6 +7469,11 @@ Delta3 = TVIL_CREAL(
     codFZ0ZZ*FZ0ZZ + 
     codFZhTT*FZhTT + 
     codFZhWW*FZhWW + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codFBAR00hT*FBAR00hT + 
     codFBAR00hW*FBAR00hW + 
     codFBAR00hZ*FBAR00hZ + 
@@ -7471,6 +7494,11 @@ Delta3 = TVIL_CREAL(
     codGh00WW*Gh00WW + 
     codGh00ZZ*Gh00ZZ + 
     codGh0W0Z*Gh0W0Z + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codGh0Whh*Gh0Whh + 
     codGh0WTT*Gh0WTT + 
     codGh0WWW*Gh0WWW + 
@@ -7493,6 +7521,11 @@ Delta3 = TVIL_CREAL(
     codGT0WTZ*GT0WTZ + 
     codGThTTZ*GThTTZ + 
     codGW000Z*GW000Z + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codGW00hW*GW00hW + 
     codGW00WZ*GW00WZ + 
     codGW0h0T*GW0h0T + 
@@ -7513,6 +7546,11 @@ Delta3 = TVIL_CREAL(
     codGZ0hTT*GZ0hTT + 
     codGZ0hWW*GZ0hWW + 
     codGZ0WhZ*GZ0WhZ + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codGZ0WTT*GZ0WTT + 
     codGZ0WWW*GZ0WWW + 
     codGZhZTT*GZhZTT + 
@@ -7533,6 +7571,11 @@ Delta3 = TVIL_CREAL(
     codH000TTZ*H000TTZ + 
     codH000WWZ*H000WWZ + 
     codH00h0WW*H00h0WW + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codH00hhWW*H00hhWW + 
     codH00hhZZ*H00hhZZ + 
     codH00hW00*H00hW00 + 
@@ -7553,6 +7596,11 @@ Delta3 = TVIL_CREAL(
     codH00WhZZ*H00WhZZ + 
     codH00WThT*H00WThT + 
     codH00WTTZ*H00WTTZ + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codH00WW00*H00WW00 + 
     codH00WW0h*H00WW0h + 
     codH00WW0W*H00WW0W + 
@@ -7574,6 +7622,11 @@ Delta3 = TVIL_CREAL(
     codH0hTZTT*H0hTZTT + 
     codH0hWWWh*H0hWWWh + 
     codH0hWWWZ*H0hWWWZ + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codH0hZWZW*H0hZWZW + 
     codH0hZZZh*H0hZZZh + 
     codH0TTT0T*H0TTT0T + 
@@ -7594,6 +7647,11 @@ Delta3 = TVIL_CREAL(
     codHhTTThT*HhTTThT + 
     codHhTTTZT*HhTTTZT + 
     codHhTZTTZ*HhTZTTZ + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codHhWWWhW*HhWWWhW + 
     codHhWWWZW*HhWWWZW + 
     codHhWZWWZ*HhWZWWZ + 
@@ -7616,6 +7674,11 @@ Delta3 = TVIL_CREAL(
     codAWI0TW*AW*I0TW + 
     codAZI0TW*AZ*I0TW + 
     codI0WZ*I0WZ + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codAhI0WZ*Ah*I0WZ + 
     codATI0WZ*AT*I0WZ + 
     codAWI0WZ*AW*I0WZ + 
@@ -7638,6 +7701,11 @@ Delta3 = TVIL_CREAL(
     codIhZZ*IhZZ + 
     codAhIhZZ*Ah*IhZZ + 
     codATIhZZ*AT*IhZZ + 
+0);
+
+/*  Silly breakup of expression to avoid an annoying compiler bug. */
+
+Delta3 += TVIL_CREAL(
     codAWIhZZ*AW*IhZZ + 
     codAZIhZZ*AZ*IhZZ + 
     codITTZ*ITTZ + 
