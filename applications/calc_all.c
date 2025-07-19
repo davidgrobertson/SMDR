@@ -210,7 +210,7 @@ int main (int argc, char *argv[])
                      &SMDR_MW_PDG, &SMDR_GammaW_PDG);
 
   /* GFermi */
-  SMDR_GFermi = SMDR_Eval_GFermi (SMDR_Mt_EXPT, 2);
+  SMDR_GFermi = SMDR_Eval_GFermi (SMDR_Mt_EXPT, 3);
 
   /* MSbar alpha(MZ), sin^2(thetaW), alphaS(MZ) in non-decoupled
      theory, Sommerfeld fine structure constant alpha, alpha(MZ) and
