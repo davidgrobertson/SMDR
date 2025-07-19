@@ -26,16 +26,16 @@ Northern Illinois University
 DeKalb, IL 60115
 USA
 
-D.G. Robertson [drobertson AT otterbein.edu]
-Department of Physics
-Otterbein University
-Westerville, OH 43081
+D.G. Robertson [drober23 AT nd.edu]
+Department of Physics and Astronomy
+University of Notre Dame
+Notre Dame, IN 46556
 USA
 
 SMDR is available from
 
+       https://github.com/davidgrobertson/SMDR
        http://www.niu.edu/spmartin/smdr
-       http://faculty.otterbein.edu/DRobertson/smdr
 
 To cite this program, please reference the paper:
 

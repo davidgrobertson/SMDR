@@ -1,5 +1,5 @@
                      ********************************
-		           Welcome to SMDR v1.2
+		           Welcome to SMDR v1.3
                      ********************************
 
 Copyright (C) 2019 S.P. Martin and D.G. Robertson
@@ -50,10 +50,10 @@ Northern Illinois University
 DeKalb, IL 60115
 USA
 
-D.G. Robertson [drobertson AT otterbein.edu]
-Department of Physics
-Otterbein University
-Westerville, OH 43081
+D.G. Robertson [drober23 AT nd.edu]
+Department of Physics and Astronomy
+University of Notre Dame
+Notre Dame, IN 46556 
 USA
 
 To cite this program, please reference the paper (referred to in this
@@ -120,10 +120,10 @@ you should cite the corresponding works.
 
 SMDR is available from:
 
+       https://github.com/davidgrobertson/SMDR
        http://www.niu.edu/spmartin/SMDR
-       http://faculty.otterbein.edu/drobertson/SMDR
 
-Version number: 1.2
+Version number: 1.3
 
 
 ********************************************************************* 
@@ -411,8 +411,8 @@ To use SMDR functions in your code, you must:
           SMDR_Melectron_EXPT;      /* Pole mass */
           SMDR_Melectron_EXPT_UNC;
 
-   At present these are set to values from the 2019 update to the
-   2018 Review of Particle Proerties. Their values can be changed at run
+   At present these are set to values from the 2025 update to the
+   Review of Particle Properties. Their values can be changed at run
    time, or updated in the file
 
           smdr_pdg.h.
@@ -1153,23 +1153,31 @@ hardware, so you might want to run it in the background.
 fig_GFermi_vs_Q (Source file: fig_GFermi_vs_Q.c)
 ------------------------------------------------
 
-Calculates GFermi as a function of the MSbar renormalization scale Q
+Calculates GFermi as a function of the MSbar renormalization scale Q 
 at which it is computed, in various approximations. The input
 parameters are obtained from the file "ReferenceModel.dat". This
-program produces by default an output file "FIG_GFermi_vs_Q.dat", with
-data in 11 columns, respectively
+program produces by default an output file "FIG_GFermi_vs_Q.dat",
+with data in 15 columns, respectively
 
-   1  Q  (MSbar renormalization scale) 
-   2  GFermi 10^5 (loopOrder = 0, tree-level) 
-   3  GFermi 10^5 (loopOrder = 1, 1-loop) 
-   4  GFermi 10^5 (loopOrder = 1.5, 1-loop plus 2-loop LO in QCD) 
-   5  GFermi 10^5 (loopOrder = 2, full 2-loop) 
-   6, 7, 8, 9 = same, but divided by GFermi(experiment)
+   1  Q  (MSbar renormalization scale)
+   2  GFermi 10^5 (loopOrder = 0, tree-level)
+   3  GFermi 10^5 (loopOrder = 1, 1-loop)
+   4  GFermi 10^5 (loopOrder = 1.5, 1-loop plus 2-loop g3^2)
+   5  GFermi 10^5 (loopOrder = 2, full 2-loop)
+   6  GFermi 10^5 (loopOrder = 2.3, 2-loop plus 3-loop g3^4)
+   7  GFermi 10^5 (loopOrder = 2.5, 2-loop plus 3-loop g3^2)
+   8  GFermi 10^5 (loopOrder = 3, 2-loop plus 3-loop gaugeless)
+   9, 10, 11, 12, 13, 14, 15 = same, but divided by GFermi(experiment)
 
-In the paper: arXiv:1907.02500 
-Standard Model parameters in the tadpole-free pure MSbar scheme
-by Stephen P. Martin and David G. Robertson, 
+In the paper: arXiv:1907.02500
+"Standard Model parameters in the tadpole-free pure MSbar scheme"
+by Stephen P. Martin and David G. Robertson,
 Figure 3.3 graphs columns 3, 4, and 5 as a function of column 1.
+
+In the paper: arXiv:2507.?????
+"Three-loop corrections to the Fermi decay constant in the MSbar scheme"
+by Stephen P. Martin,
+Figure ??? graphs columns 3, 5, and 8 as a function of column 1.
 
 This program takes two optional command line arguments:
 
@@ -2188,21 +2196,26 @@ MZPDGresult, GammaZPDGresult.
 
 SMDR_REAL SMDR_Eval_GFermi (SMDR_REAL Q_eval, float loopOrder);
 
-Returns GFermi at up to two loops. Based on Deltartilde given in
-section 3 of arXiv:1907.02500 and the ancillary file Deltartilde.txt.
-
+Returns GFermi at up to two loops with leading three-loop corrections. 
+Based on Deltartilde given in section 3 of arXiv:1907.02500 and its 
+ancillary file Deltartilde.txt, and on 
+"Three-loop corrections to the Fermi decay constant in the MSbar scheme"
+2507.?????.
 See also Deltarbar in
-   Kniehl and Veretin 1401.1844 eqs (37)-(40) and
-   Kniehl, Pikelner, Veretin 1503.02138 eqs (60)-(62). Appendix A.2
-   Kniehl, Pikelner, Veretin 1601.08143, file
-   mr-1.3.2/mr/dr/drbar20.cpp in the computer code "mr".
- 
+Kniehl and Veretin 1401.1844 eqs (37)-(40) and
+Kniehl, Pikelner, Veretin 1503.02138 eqs (60)-(62). Appendix A.2
+Kniehl, Pikelner, Veretin 1601.08143, file
+mr-1.3.2/mr/dr/drbar20.cpp in the computer code "mr".
+
 The argument loopOrder has allowed values:
     0    tree-level
     1    1-loop
     1.3  1-loop plus 2-loop leading order in QCD
     1.5  1-loop plus 2-loop leading order in QCD and yt
-    2     Full 2-loop result
+    2    Full 2-loop result
+    2.3  Full 2-loop result + 3-loop leading order in QCD
+    2.5  Full 2-loop result + 3-loop mixed QCD
+    3    Full 2-loop result + 3-loop gaugeless limit
 
 If the argument Q_eval is positive, then the inputs are obtained by
 first RG running the MSbar parameters:
@@ -3105,7 +3118,7 @@ int main (int argc, char *argv[])
                      &SMDR_MZ_PDG, &SMDR_GammaZ_PDG);
 
   /* Evaluate GFermi */
-  SMDR_GFermi = SMDR_Eval_GFermi (SMDR_Mt_EXPT, 2);
+  SMDR_GFermi = SMDR_Eval_GFermi (SMDR_Mt_EXPT, 3);
 
   /* Evaluate MSbar alpha(MZ), sin^2(thetaW), alphaS(MZ) in
      non-decoupled theory, Sommerfeld fine structure constant alpha,

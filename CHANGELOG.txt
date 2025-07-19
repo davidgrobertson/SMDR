@@ -1,3 +1,35 @@
+July 15, 2025 Version 1.3
+---------------------------
+
+* New results for 3-loop contributions to Fermi constant in:
+    src/GFermi.c 
+    src/includes/Delta3r_h.c
+    src/includes/Delta3r_i.c
+    src/includes/Delta3r_f.c 
+  Accordingly, the second argument of SMDR_Eval_GFermi() has been changed from 
+  2 to 3 in:
+    src/fit_obs.c
+    applications/calc_all.c
+    C++/calc_all.cpp
+
+* Broke up "large" expressions in various files in src/includes/, to
+  avoid an apparent compiler bug (?) in some versions of gcc 11.*
+
+* Updated the following files to reflect 2025 PDG input values as well
+  as the new 3-loop GFermi calculation:
+    ReferenceModel.dat 
+    benchmark_data/ReferenceModel.dat
+    src/smdr_pdg.h
+
+* Reduced the maximum number of iterations from 16 to 12 on line 88 of
+  src/fit_obs.c. More than 12 iterations never seems to help.
+
+* Added one extra digit to the printing of 1/alpha, and two extra digits 
+  to the printing of Mmuon, on lines 628 and 640 of src/io.c.
+
+* In src/Makefile, added -fcommon to CFLAGS
+
+
 May 22, 2022 Version 1.2
 ---------------------------
 
@@ -28,6 +60,7 @@ May 22, 2022 Version 1.2
 
 * The numbers of digits in the prompts for calc_fit in interactive mode
   have been increased.
+
 
 March 10, 2022 Version 1.1
 ---------------------------
