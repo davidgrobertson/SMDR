@@ -5,8 +5,8 @@
 
 /* Fermi decay constant. Table 1 and equation (10.8) of April 2024 RPP. 
    But note that we decrease it by a factor of (3/10) Mmu^2/MW^2, because
-   we include the factor of (1 + (3/5) Mmu^2/MW^2) in the defining
-   proportionality between 1/tau_mu and GF^2.
+   we don't include the factor of (1 + (3/5) Mmu^2/MW^2) in the definition
+   of GF, which is 1/tau_mu = GF^2 (other corrections) (1 + (3/5) Mmu^2/MW^2)
 */
 SMDR_REAL SMDR_GFermi_EXPT =     0.000011663782;
 SMDR_REAL SMDR_GFermi_EXPT_UNC = 0.000000000006;

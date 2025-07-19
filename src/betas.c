@@ -71,8 +71,10 @@
 /* ---------------------------------------------------------------- */
 /* ---------------------------------------------------------------- */
 /* 
-   Full 3-loop SM beta functions, with known 4-loop (partly
-   implemented) and 5-loop pure QCD (not implemented yet but will be).
+   Full 3-loop SM beta functions, with 4-loop contributions for the
+   gauge-couplings beta functions, and 4-loop and 5-loop pure QCD
+   contributions to the g3 and yt beta functions, and 4-loop QCD 
+   contributions to the Higgs self-coupling beta function.
 */
 
 int SMDR_Betas (int loopOrder)

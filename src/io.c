@@ -625,7 +625,7 @@ void SMDR_Write_OS_Inputs (FILE *fp, char *prepend)
   fprintf(fp, "%sMZ = %.5Lf;\n", prepend, SMDR_MZ_PDG);
   fprintf(fp, "%salpha_S_5_MZ = %Lf;\n", prepend, SMDR_alphaS_5_MZ);
   fprintf(fp, "%sGFermi = %.8Lf 10^-5;\n", prepend, 100000 * SMDR_GFermi);
-  fprintf(fp, "%salpha = 1/%.8Lf;\n", prepend, 1./SMDR_alpha);
+  fprintf(fp, "%salpha = 1/%.9Lf;\n", prepend, 1./SMDR_alpha);
   fprintf(fp, "%sDelta_hadronic^(5) alpha(MZ) = %.6Lf;\n",
 	  prepend, SMDR_Delta_alpha_had_5_MZ_in);
 
@@ -637,7 +637,7 @@ void SMDR_Write_OS_Inputs (FILE *fp, char *prepend)
   fprintf(fp, "md(2 GeV) = %.6Lf;\n", SMDR_md_2GeV);
 
   fprintf(fp, "%sMtau = %.6Lf;       ", prepend, SMDR_Mtau_pole);
-  fprintf(fp, "Mmuon = %.8Lf;    ", SMDR_Mmuon_pole);
+  fprintf(fp, "Mmuon = %.10Lf;  ", SMDR_Mmuon_pole);
   fprintf(fp, "Melectron = %.12Lf;\n", SMDR_Melectron_pole);
   
   return;

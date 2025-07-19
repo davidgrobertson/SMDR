@@ -22,7 +22,8 @@
 INC_DIRS = -I$(TSIL_DIR) -I$(TVIL_DIR)
 LIB_DIRS = -L$(SMDR_ROOT) -L$(TSIL_DIR) -L$(TVIL_DIR)
 
-CFLAGS	= $(INC_DIRS) $(SMDR_OPT)
+# -fcommon added after gcc 10:
+CFLAGS	= $(INC_DIRS) $(SMDR_OPT) -fcommon
 LDFLAGS	= $(LIB_DIRS)
 LIBS    = -lsmdr -l3vil -ltsil -lm
 ARFLAGS = -rus

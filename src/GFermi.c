@@ -44,7 +44,10 @@ SMDR_COMPLEX IhhW, IhWW, IhWZ, IhZZ, IttW, IttZ, IWWW, IWWZ, IWZZ;
     1    1-loop
     1.3  1-loop plus 2-loop leading order in QCD
     1.5  1-loop plus 2-loop leading order in QCD and yt
-    2     Full 2-loop result
+    2    Full 2-loop result
+    2.3  Full 2-loop result + 3-loop leading order in QCD
+    2.5  Full 2-loop result + 3-loop mixed QCD
+    3    Full 2-loop result + 3-loop gaugeless limit
 
     If the argument Q_eval is positive, then the inputs are obtained
     by first RG running the MSbar parameters:
@@ -64,6 +67,19 @@ SMDR_REAL SMDR_Eval_GFermi (SMDR_REAL Q_eval, float loopOrder)
   SMDR_REAL Deltartilde;
   SMDR_REAL eightWm5Z2, Zm4t, hmW, hmW2, WmZ, WmZ2, hm4Z,hm4W;
   SMDR_REAL Deltartilde2EW;
+  int success = 1;
+  TVIL_RESULT result;
+
+  SMDR_REAL Delta3r_a, Delta3r_b, Delta3r_c, Delta3r_d, Delta3r_e, 
+            Delta3r_f, Delta3r_g, Delta3r_h, Delta3r_i, Delta3r_j;
+  SMDR_REAL lnbart, lnbart2, lnbart3, lnbarh, lnbarh2, lnbarh3;
+  SMDR_REAL hmt, hmtsq, hm2t, hm3t, hm4t, h2m2htp4t2;    
+
+  SMDR_COMPLEX Hhtttht, Ghtttt, Fhhtt, Hhhthtt, Ghhhtt;
+  SMDR_COMPLEX H0000ht, H000htt, H00h0tt, H00ht0t, H00htht, H00thtt, 
+               H00ttht, H0hhtht, H0httth, H0tttht, G00tht, Gh000t, 
+               Gh00tt, Gh0t0t, Gh0thh, Gh0ttt, Gt000h, Gt00ht, Gt0hht, 
+               Gththt, Ft0hh, Fh0tt, Fh00t, FBAR00ht, FBAR0htt, Ihht;
 
   char funcname[] = "SMDR_Eval_GFermi";
 
@@ -77,9 +93,14 @@ SMDR_REAL SMDR_Eval_GFermi (SMDR_REAL Q_eval, float loopOrder)
        (SMDR_FABS(loopOrder-1) > 0.0001) &&
        (SMDR_FABS(loopOrder-1.3) > 0.0001) &&
        (SMDR_FABS(loopOrder-1.5) > 0.0001) &&
-       (SMDR_FABS(loopOrder-2) > 0.0001) )
-    SMDR_Error (funcname, 
-		"Invalid loop order specified, should be 0, 1, 1.3, 1.5, or 2.", 3);
+       (SMDR_FABS(loopOrder-2.0) > 0.0001) &&
+       (SMDR_FABS(loopOrder-2.3) > 0.0001) &&
+       (SMDR_FABS(loopOrder-2.5) > 0.0001) &&
+       (SMDR_FABS(loopOrder-3) > 0.0001) 
+     )
+    SMDR_Error (funcname,
+    "Invalid loop order specified, should be 0, 1, 1.3, 1.5, 2. 2.3, 2.5 or 3", 
+    3);
 
   /* Check input parameters for sanity: */
   SMDR_Check_lambda_Range (0.05, 0.2);
@@ -94,9 +115,9 @@ SMDR_REAL SMDR_Eval_GFermi (SMDR_REAL Q_eval, float loopOrder)
 
   SMDR_Update ();
 
-  Deltartilde = 0;
+  /* This is the contribution from 3/10 (Mmu/MW)^2. Almost negligible. */
+  Deltartilde = 0.00000051862;
 
-  /* Tree-level result: */
   if (loopOrder > 0.9999) {
     Ah = TSIL_A (h, Q2);
     AW = TSIL_A (W, Q2);
@@ -148,6 +169,158 @@ SMDR_REAL SMDR_Eval_GFermi (SMDR_REAL Q_eval, float loopOrder)
 
     Deltartilde += (TWOLOOPFACTOR/v4) * Deltartilde2EW;
   }
+
+
+  /* 3-loop leading QCD */
+  if (loopOrder > 2.01) {
+    lnbart = At/T + 1.;
+    lnbart2 = lnbart * lnbart;
+    lnbart3 = lnbart2 * lnbart;
+
+    Delta3r_a = -14.334528214470256 + 0.5501259195736423 * lnbart + 
+                -19.833333333333333 * lnbart2 + 3.6666666666666667 * lnbart3;
+
+    Delta3r_b = -0.2517396104459153 - 0.21516028843332296 * lnbart + 
+                10.5 * lnbart2 + 6. * lnbart3;
+
+    Delta3r_c = 32.09371831994012 - 9.227018310142792 * lnbart + 
+                9.333333333333333 * lnbart2 - 2.6666666666666667 * lnbart3;
+
+    Delta3r_d = -22.432626144403768;
+
+    /* 
+    printf("Deltara = %Lf\n", g32 * g32 * yt2 * 12.*Delta3r_a);
+    printf("Deltarb = %Lf\n", g32 * g32 * yt2 * (16./3.) *Delta3r_b);
+    printf("Deltarc = %Lf\n", g32 * g32 * yt2 * 6.* Delta3r_c);
+    printf("Deltard = %Lf\n", g32 * g32 * yt2 * 2.* Delta3r_d);
+    */
+
+    Deltartilde += (THREELOOPFACTOR) * g32 * g32 * yt2 * 4. * (
+            3. * Delta3r_a + 
+       (4./3.) * Delta3r_b + 
+       (3./2.) * Delta3r_c + 
+       (1./2.) * Delta3r_d);
+  }
+
+  success = 1;
+
+  /* 3-loop mixed QCD */
+  if (loopOrder > 2.31) {
+
+    Delta3r_e = -0.03986813369645287 - 1.9202637326070943 * lnbart + 
+                7. * lnbart2 - 6.*lnbart3;
+
+    /* 
+    printf("Deltare = %Lf\n", g32 * yt2 * yt2 * 12. * Delta3r_e);
+    */
+
+    lnbarh = Ah/h + 1.;
+    lnbarh2 = lnbarh * lnbarh;
+    lnbarh3 = lnbarh2 * lnbarh;
+
+    success *= TVIL_Hanalytic (0, 0, h, 0, T, T, Q2, &H00h0tt);    
+    success *= TVIL_Hanalytic (0, 0, T, T, h, T, Q2, &H00ttht);    
+    success *= TVIL_Hanalytic (0, T, T, T, h, T, Q2, &H0tttht);    
+    success *= TVIL_Ganalytic (0, 0, T, h, T, Q2, &G00tht);    
+    success *= TVIL_Ganalytic (h, 0, T, T, T, Q2, &Gh0ttt);    
+    success *= TVIL_Ganalytic (T, 0, 0, h, T, Q2, &Gt00ht);    
+    success *= TVIL_FBARanalytic (0, 0, h, T, Q2, &FBAR00ht);    
+    success *= TVIL_FBARanalytic (0, h, T, T, Q2, &FBAR0htt);    
+    success *= TVIL_Fanalytic (h, 0, T, T, Q2, &Fh0tt);    
+    success *= TVIL_Fanalytic (h, 0, 0, T, Q2, &Fh00t);    
+    Ihht = TSIL_I2 (h, h, T, Q2);    
+
+    hmt = h - T;
+    hmtsq = hmt * hmt;
+    hm4t = h - 4. * T;
+    h2 = h * h;
+    h3 = h2 * h;
+    h4 = h3 * h;
+    T2 = T * T;
+    T3 = T2 * T;
+    T4 = T3 * T;
+    h2m2htp4t2 = h2 - 2. * h * T + 4. * T2;
+
+    #include "includes/Delta3r_f.c"
+
+    /*
+    printf("Deltarf = %Lf\n", g32 * yt2 * yt2 * 4. * Delta3r_f);
+    */
+
+    Deltartilde += (THREELOOPFACTOR) * g32 * yt2 * yt2 * 4. *
+                   (3. * Delta3r_e + Delta3r_f);
+  }
+
+  /* 3-loop non-QCD */
+  if (loopOrder > 2.51) {
+
+    Delta3r_g = -0.125 + 0.75 * lnbart - 1.5 * lnbart2 + lnbart3;
+
+    /*
+    printf("Deltarg = %Lf\n", 27. * yt2 * yt2 * yt2 * Delta3r_g);
+    */
+
+    Deltartilde += (THREELOOPFACTOR) * yt2 * yt2 * yt2 * 27. * Delta3r_g;
+
+    hm2t = h - 2. * T;
+    hm3t = h - 3. * T;
+
+    TVIL_Evaluate (h, T, T, T, h, T, Q2, &result);
+    Hhtttht = TVIL_GetFunction (&result, "H");
+    Gththt  = TVIL_GetFunction (&result, "Gwuzvy");
+    Ghtttt  = TVIL_GetFunction (&result, "Guvxwz");
+    Fhhtt   = TVIL_GetFunction (&result, "Fuvyz");
+
+    TVIL_Evaluate (h, h, T, h, T, T, Q2, &result);
+    Hhhthtt = TVIL_GetFunction (&result, "H");
+    Ghhhtt  = TVIL_GetFunction (&result, "Gvuxwy");
+    
+    success *= TVIL_Hanalytic (0, 0, 0, 0, h, T, Q2, &H0000ht);    
+    success *= TVIL_Hanalytic (0, 0, 0, h, T, T, Q2, &H000htt);    
+    success *= TVIL_Hanalytic (0, 0, h, T, 0, T, Q2, &H00ht0t);    
+    success *= TVIL_Hanalytic (0, 0, h, T, h, T, Q2, &H00htht);    
+    success *= TVIL_Hanalytic (0, 0, T, h, T, T, Q2, &H00thtt);    
+    success *= TVIL_Hanalytic (0, h, h, T, h, T, Q2, &H0hhtht);    
+    success *= TVIL_Hanalytic (0, h, T, T, T, h, Q2, &H0httth);    
+    success *= TVIL_Ganalytic (h, 0, 0, 0, T, Q2, &Gh000t);    
+    success *= TVIL_Ganalytic (h, 0, T, 0, T, Q2, &Gh0t0t);    
+    success *= TVIL_Ganalytic (h, 0, 0, T, T, Q2, &Gh00tt);    
+    success *= TVIL_Ganalytic (h, 0, T, h, h, Q2, &Gh0thh);    
+    success *= TVIL_Ganalytic (T, 0, 0, 0, h, Q2, &Gt000h);    
+    success *= TVIL_Ganalytic (T, 0, h, h, T, Q2, &Gt0hht);    
+    success *= TVIL_Fanalytic (T, 0, h, h, Q2, &Ft0hh);    
+
+    #include "includes/Delta3r_h.c"
+
+    /*
+    printf("Deltarh = %Lf\n", 9. * yt2 * yt2 * yt2 * Delta3r_h);
+    */
+
+    Deltartilde += (THREELOOPFACTOR) * yt2 * yt2 * yt2 * 9. * Delta3r_h;
+
+    #include "includes/Delta3r_i.c"
+
+    /*
+    printf("Deltari = %Lf\n", 3. * yt2 * yt2 * yt2 * Delta3r_i);
+    */
+
+    Deltartilde += (THREELOOPFACTOR) * yt2 * yt2 * yt2 * 3. * Delta3r_i;
+
+    Delta3r_j = 46.88086739416974 + 44.75920123436201*lnbarh - 72.*lnbarh2;
+
+    /*
+    printf("Deltarj = %Lf\n\n\n", k * k * k * Delta3r_j);
+    */
+
+    Deltartilde += (THREELOOPFACTOR) * k * k * k * Delta3r_j;
+  }
+
+    /*
+    printf("success = %d\n",success);
+    */
+
+  if (success != 1) 
+     printf("Disaster! Some analytic function evaluation failed.\n");
 
   return ((1 + Deltartilde)/(SQRT2 * v2));
 }

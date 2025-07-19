@@ -85,7 +85,7 @@ int  SMDR_Fit_Inputs (SMDR_REAL Q_target,
   SMDR_Save_Inputs ();
   SMDR_Delta_alpha_had_5_MZ_in = Delta_alpha_had_target;
 
-  for (j=0; j<16; j++) {
+  for (j=0; j<12; j++) {
 
     /* Find the new input parameter estimates by comparing OS observables to the 
        targets. On the 0th iteration, the OS observables and MSbar parameters
@@ -280,7 +280,7 @@ int  SMDR_Fit_Inputs (SMDR_REAL Q_target,
     SMDR_Eval_MW_pole (160., 2.5, &SMDR_MW_pole, &SMDR_GammaW_pole,
                        &SMDR_MW_PDG, &SMDR_GammaW_PDG);
 
-    SMDR_GFermi = SMDR_Eval_GFermi (SMDR_Mt_EXPT, 2);
+    SMDR_GFermi = SMDR_Eval_GFermi (SMDR_Mt_EXPT, 3);
     SMDR_Eval_Gauge (SMDR_Mt_pole, SMDR_Mh_pole, SMDR_MW_PDG);
     SMDR_Eval_QCDQED_at_MZ (SMDR_MZ_EXPT, SMDR_MZ_EXPT, 5);
 
